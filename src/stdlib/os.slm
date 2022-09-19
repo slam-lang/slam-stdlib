@@ -193,6 +193,35 @@ class os
     read
     ret
   end
+  
+  {
+  args: ptr[name]
+  result: ptr[value]
+  
+  gets an environment variable
+  }
+  proc env 1 1
+    os.targ swap put disc  
+    
+    envp
+    do
+      copy read
+      '=' os.tempbuff (cstr.split)
+      os.targ read (cstr.eq) if [
+        swap disc
+        ret
+      ]
+      disc
+
+      int.SIZE +
+      copy read NULL !=
+    end
+    disc
+
+    NULL
+
+    ret
+  end
 
   {
   args: pointer int int
