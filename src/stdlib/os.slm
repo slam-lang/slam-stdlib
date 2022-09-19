@@ -79,6 +79,8 @@ end
 class os
   var waitsig 8
   var statbuff statresult.SIZE
+  var targ int.SIZE
+  var tempbuff 64
   
   proc fork 0 1
     sysc.FORK sys0
@@ -95,6 +97,7 @@ class os
 
   proc fexists 1 1
     os.statbuff
+    swap
     sysc.STAT sys2
     0 < !
 
@@ -193,6 +196,7 @@ class os
     read
     ret
   end
+
   
   {
   args: ptr[name]
