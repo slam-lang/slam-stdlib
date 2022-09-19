@@ -150,6 +150,35 @@ class os
     disc
     ret
   end
+  
+  proc execcmdloud 1 0
+    (os.fork)
+    copy 0 == if [
+      {child}
+      covr envp swap copy read
+    
+      sysc.EXECVE sys3 disc
+      disc disc
+      -1
+      quit
+    ]
+    copy 0 > if [
+      {parent}
+  
+      NULL
+      0
+      os.waitsig
+      -1
+      sysc.WAIT4 sys4 0 < if (os.deverr)
+      disc disc
+      ret
+    ]
+    0 < if [
+      "ERROR" (cstr.println)
+    ]
+    disc
+    ret
+  end
 
   {
   args: ptr[stringList]
@@ -174,6 +203,33 @@ class os
     (log.log) 
 
     (os.execcmd)
+    
+    ret
+  end
+
+  {
+  args: ptr[stringList]
+  returns: 
+  
+  prints a command then runs it
+  }
+  proc execcmdecholoud 1 0
+    0 1 (log.level)
+    "CMD" "Run: " (log.msg)
+    copy
+    do
+      copy read (log.cat)
+      int.SIZE +
+       
+      copy if [
+        " " (log.cat)
+      ]
+      copy read NULL !=
+    end
+    disc
+    (log.log) 
+
+    (os.execcmdloud)
     
     ret
   end
