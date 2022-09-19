@@ -1,6 +1,6 @@
+inc stdlib/mem.slm
+inc stdlib/os.slm
 inc stdlib.slm
-inc mem.slm
-inc os.slm
 
 class sockaddr
   prop family 2

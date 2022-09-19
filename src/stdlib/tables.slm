@@ -9,8 +9,8 @@ TODO: remove
 TODO: defrag
 }
 
+inc stdlib/mem.slm
 inc stdlib.slm
-inc mem.slm
 
 class tab
   prop Max int.SIZE

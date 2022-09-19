@@ -1,5 +1,5 @@
+inc stdlib/mem.slm
 inc stdlib.slm
-inc mem.slm
 
 class str
   prop max int.SIZE

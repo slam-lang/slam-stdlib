@@ -7,9 +7,9 @@ essentially an array of linked lists
 TODO: make hash not a char
 }
 
+inc stdlib/arrays.slm
+inc stdlib/mem.slm
 inc stdlib.slm
-inc arrays.slm
-inc mem.slm
 
 class hash
   var result 1

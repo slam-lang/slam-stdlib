@@ -1,5 +1,5 @@
-inc mem.slm
-inc os.slm
+inc stdlib/mem.slm
+inc stdlib/os.slm
 
 class color
   prop r 1

@@ -1,5 +1,5 @@
+inc stdlib/log.slm
 inc stdlib.slm
-inc log.slm
 
 class testin
   proc setup 1 0
