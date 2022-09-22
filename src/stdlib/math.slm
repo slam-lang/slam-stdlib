@@ -83,7 +83,7 @@ class float
   end
 
   proc fromint 1 1
-    copy 0 == if [ret 0]
+    copy 0 == if [0 ret]
     float.temp swap put disc
     float.working 0 put disc
     
