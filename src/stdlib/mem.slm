@@ -108,7 +108,7 @@ class heap
   var isinit 1
 
   const HEAP_PAGE 64000
-  const HEAP_STEP 16
+  const HEAP_STEP 128
 
   proc allocpage 0 0
     heap.endaddr read
@@ -267,6 +267,7 @@ class heap
   end
 
   var result int.SIZE
+  var start int.SIZE
   
   {
   args: ptr[mem] int[newsize]
@@ -289,7 +290,6 @@ class heap
 
     heap.result
     heap.reqsize read
-    heapentry.SIZE -
     (heap.alloc)
     put disc
 
@@ -297,6 +297,8 @@ class heap
     copy
     heapentry.SIZE -
     heapentry.Size . read
+    heapentry.SIZE -
+    
     (mem.copy)
 
     heap.result read
