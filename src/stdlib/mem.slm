@@ -25,6 +25,8 @@ class mem
 
   proc copy 3 0
     mem.tmp swap put disc
+    covr
+    covr == if [disc disc ret]
     do
       covr
       covr readc
@@ -34,8 +36,9 @@ class mem
       swap 1 +
   
       mem.tmp
-      mem.tmp read
-      1 - put disc
+      copy read
+      1 -
+      put disc
       mem.tmp read 0 >
     end
     disc
@@ -105,7 +108,7 @@ class heap
   var isinit 1
 
   const HEAP_PAGE 64000
-  const HEAP_STEP 128
+  const HEAP_STEP 16
 
   proc allocpage 0 0
     heap.endaddr read
@@ -175,7 +178,6 @@ class heap
 
     heap.usedtemp read (int.print)
     (cstr.cr)
-
 
     ret
   end
@@ -263,6 +265,8 @@ class heap
 
     ret
   end
+
+  var result int.SIZE
   
   {
   args: ptr[mem] int[newsize]
@@ -276,57 +280,26 @@ class heap
     heap.HEAP_STEP +
     heap.reqsize swap put disc
 
-    heapentry.SIZE -
-
-    copy (heapentry.isentry) ! if [
+    copy (heap.free)
+    copy
+    heapentry.SIZE - (heapentry.isentry) ! if [
       "Bad realloc call" (cstr.println)
+      copy heapentry.SIZE - (int.printhex) ret
     ]
 
+    heap.result
     heap.reqsize read
-    covr heapentry.Size . read == if [
-      heapentry.SIZE +
-      ret
-    ]
-    
-    copy
-    copy heapentry.Size . read +
-    covr heapentry.Size . read
-    heap.HEAP_STEP -
-    swap heap.HEAP_STEP -
-    do
-      swap heap.HEAP_STEP +
-      swap heap.HEAP_STEP +
-      copy (heapentry.isentry) if [
-        disc
-        disc
-        copy heapentry.SIZE +
-        (heap.free)
-        heap.reqsize
-        read (heap.alloc)
-        swap
-        covr heapentry.Data .
-        copy heapentry.Size . read
-        (mem.copy)
-        ret
-      ]
-
-      covr heap.reqsize read > !
-    end
-    disc
-    disc
-
-    copy heapentry.Size .
-    heap.reqsize read
+    heapentry.SIZE -
+    (heap.alloc)
     put disc
-    copy
-    copy heapentry.Addr .
-    swap
-    put disc
-    copy heapentry.Flags .
-    1
-    putc disc
 
-    heapentry.SIZE +
+    heap.result read swap
+    copy
+    heapentry.SIZE -
+    heapentry.Size . read
+    (mem.copy)
+
+    heap.result read
     ret
   end
 end

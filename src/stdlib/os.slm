@@ -31,6 +31,8 @@ class sysc
       WAIT4
       KILL
 
+  79  GETCWD
+
   257 OPENAT
   end
 end
@@ -344,6 +346,18 @@ class os
       "Error closing file" (cstr.println)
       -1 quit
     ]
+    ret
+  end
+
+  var cwdbuff 256
+
+  proc cwd 0 1
+    os.cwdbuff
+    255
+    sysc.GETCWD sys2
+    disc
+    
+    os.cwdbuff
     ret
   end
 end

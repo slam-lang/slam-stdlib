@@ -35,15 +35,15 @@ class str
   proc print 1 0
     str.workingtemp swap put disc
     
-    -1
+    0
     do
-      1 +
 
       copy
       str.workingtemp read
       str.data . +
       readc dump
       
+      1 +
       
       copy
       str.workingtemp read
@@ -185,7 +185,7 @@ class str
       copy
       str.workingtemp read str.max .
       swap put disc
-      (heap.realloc) 
+      (heap.realloc)
       str.workingtemp swap put disc
     ]
    
@@ -201,6 +201,21 @@ class str
 
     str.workingtemp read
     
+    ret
+  end
+
+  proc eq 2 1
+    covr (str.len)
+    covr (cstr.len) != if [ disc disc bool.false ret ]
+
+    covr str.data .
+    covr
+    copy (cstr.len)
+    (mem.eq)
+
+    swap disc
+    swap disc
+
     ret
   end
   

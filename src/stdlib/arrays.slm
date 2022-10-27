@@ -18,10 +18,10 @@ class seq
   var elemtemp 32
   
   {
-  args: int[maxSize] int[elemSize] ptr[seqay]
-  returns: ptr[seqay]
+  args: int[maxSize] int[elemSize]
+  returns: ptr[seq]
 
-  Creates an seqay
+  Creates an seq
   }
   proc new 2 1
     copy (heap.zalloc) seq.curtemp swap put disc
@@ -361,6 +361,23 @@ class llentry
     ret
   end
 
+  proc ptrat 2 1
+    copy 0 == if [
+      disc
+      llentry.next . read
+      llentry.data .
+      ret
+    ]
+
+    1 -
+    covr llentry.next . read
+    swap
+    (llentry.ptrat)
+    swap disc
+
+    ret
+  end
+
   proc append 2 1
     covr llentry.next . swap put disc
       
@@ -434,6 +451,24 @@ class llist
       copy NULL !=
     end
     disc
+
+    ret
+  end 
+  
+  proc ptrat 2 1
+    swap llist.curtemp swap put disc
+
+    copy 0 == if [
+      disc
+      llist.curtemp read llist.root . read
+      llentry.data .
+      ret
+    ]
+
+    1 -
+    llist.curtemp read llist.root . read
+    swap
+    (llentry.ptrat)
 
     ret
   end
