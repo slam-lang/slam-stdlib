@@ -280,12 +280,12 @@ class heap
     heap.HEAP_STEP +
     heap.reqsize swap put disc
 
-    copy (heap.free)
     copy
     heapentry.SIZE - (heapentry.isentry) ! if [
       "Bad realloc call" (cstr.println)
       copy heapentry.SIZE - (int.printhex) ret
     ]
+    copy (heap.free)
 
     heap.result
     heap.reqsize read
