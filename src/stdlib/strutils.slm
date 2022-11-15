@@ -3,7 +3,7 @@ inc stdlib.slm
 class strutil
   var tempstore int.SIZE
   
-  proc starts 2 1
+  push proc starts 2 1
     copy (cstr.len)
     (mem.eq)
 

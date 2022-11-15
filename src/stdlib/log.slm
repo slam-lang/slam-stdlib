@@ -1,5 +1,5 @@
-inc stdlib/mem.slm
-inc stdlib.slm
+inc "stdlib/mem.slm"
+inc "stdlib.slm"
 
 class log
   prop Id   int.SIZE
@@ -16,7 +16,7 @@ class log
 
   sets the log level for logs
   }
-  proc level 2 0
+  push proc level 2 0
     log.curlog
     log.Id .
     swap put disc
@@ -28,28 +28,28 @@ class log
     ret
   end
 
-  proc msg 2 0
+  push proc msg 2 0
     log.curlog
     log.Mes . (cstr.clear)
     swap
-    (cstr.copy) disc disc
+    (cstr.cpy) disc disc
     
     log.curlog
     log.Hint . swap
     3
-    (mem.copy)
+    (mem.cpy)
 
     ret
   end
 
-  proc cat 1 0
+  push proc cat 1 0
     log.curlog
     log.Mes . swap (cstr.cat) disc
 
     ret
   end
 
-  proc log 0 0
+  push proc log 0 0
     log.curlog
     log.Crit . readc
     copy 1 == if [

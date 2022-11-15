@@ -1,4 +1,4 @@
-inc stdlib.slm
+inc "stdlib.slm"
 
 const BRK 12
 
@@ -8,7 +8,7 @@ class heapentry
   prop Size int.SIZE
   prop Data 0
 
-  proc isentry 1 1
+  push proc isentry 1 1
     copy
     copy heapentry.Addr . read ==
     covr heapentry.Flags . readc
@@ -23,10 +23,10 @@ end
 class mem
   var tmp 8
 
-  proc copy 3 0
+  push proc cpy 3 0
     mem.tmp swap put disc
     covr
-    covr == if [disc disc ret]
+    covr == if [ disc disc ret ]
     do
       covr
       covr readc
@@ -47,7 +47,7 @@ class mem
     ret
   end
   
-  proc eq 3 1
+  push proc eq 3 1
     swap mem.tmp swap put disc
 
     do
@@ -80,7 +80,7 @@ class mem
     ret
   end
 
-  proc zero 2 0
+  push proc zero 2 0
     mem.tmp swap put disc
     do
       copy
@@ -110,7 +110,7 @@ class heap
   const HEAP_PAGE 64000
   const HEAP_STEP 128
 
-  proc allocpage 0 0
+  push proc allocpage 0 0
     heap.endaddr read
     heap.HEAP_PAGE +
     copy
@@ -123,7 +123,7 @@ class heap
     ret
   end
 
-  proc init 0 0
+  push proc init 0 0
     heap.isinit readc if [
       ret
     ]
@@ -144,7 +144,7 @@ class heap
     ret
   end
 
-  proc map 0 0
+  push proc map 0 0
     heap.usedtemp 0 put disc
 
     "HEAP MAP" (cstr.println)
@@ -182,7 +182,7 @@ class heap
     ret
   end
 
-  proc alloc 1 1
+  push proc alloc 1 1
     (heap.init)
     heapentry.SIZE +
     copy heap.HEAP_STEP /% swap disc -
@@ -226,7 +226,7 @@ class heap
     ret
   end
   
-  proc zalloc 1 1
+  push proc zalloc 1 1
     (heap.init)
     (heap.alloc)
     copy
@@ -239,7 +239,7 @@ class heap
     ret
   end
 
-  proc free 1 0
+  push proc free 1 0
     heapentry.SIZE -
     copy (heapentry.isentry) ! if [
       "Bad free call" (cstr.println)
@@ -253,7 +253,7 @@ class heap
     ret
   end
 
-  proc tryfree 1 0
+  push proc tryfree 1 0
     heapentry.SIZE -
     copy (heapentry.isentry) ! if [
       disc ret
@@ -275,7 +275,7 @@ class heap
 
   reallocates a block
   }
-  proc realloc 2 1
+  push proc realloc 2 1
     heapentry.SIZE +
     copy heap.HEAP_STEP /% swap disc -
     heap.HEAP_STEP +
@@ -299,7 +299,7 @@ class heap
     heapentry.Size . read
     heapentry.SIZE -
     
-    (mem.copy)
+    (mem.cpy)
 
     heap.result read
     ret

@@ -2,14 +2,14 @@ inc stdlib/log.slm
 inc stdlib.slm
 
 class testin
-  proc setup 1 0
+  push proc setup 1 0
     "- " (cstr.print)
     (cstr.print)
 
     ret
   end
   
-  proc done 0 0
+  push proc done 0 0
     2 1 (log.level)
 
     (cstr.cr)
@@ -17,14 +17,14 @@ class testin
     ret
   end
   
-  proc next 1 0
+  push proc next 1 0
     (testin.done)
     (testin.setup)
     
     ret
   end
   
-  proc cstreq 2 0
+  push proc cstreq 2 0
     covr covr (cstr.eq) ! if [
       " - Assertion Failed `" (cstr.print)
       (cstr.print)
@@ -40,7 +40,7 @@ class testin
     ret
   end
 
-  proc eq 2 0
+  push proc eq 2 0
     covr covr != if [
       " - Assertion Failed `" (cstr.print)
       (int.cstr) (cstr.print)
@@ -56,7 +56,7 @@ class testin
     ret
   end
   
-  proc true 1 0
+  push proc true 1 0
     copy 0 == if [
       " - Assertion Failed " (cstr.print)
       (int.cstr) (cstr.print)
@@ -69,7 +69,7 @@ class testin
     ret
   end
   
-  proc false 1 0
+  push proc false 1 0
     copy 0 != if [
       " - Assertion Failed " (cstr.print)
       (int.cstr) (cstr.print)

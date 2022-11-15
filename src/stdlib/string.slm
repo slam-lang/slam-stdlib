@@ -1,5 +1,5 @@
-inc stdlib/mem.slm
-inc stdlib.slm
+inc "stdlib/mem.slm"
+inc "stdlib.slm"
 
 class str
   prop max int.SIZE
@@ -18,7 +18,7 @@ class str
 
   creats a string from a ` string
   }
-  proc new 0 1
+  push proc new 0 1
     str.STEP 16 + (heap.zalloc)
 
     copy str.max . str.STEP put disc
@@ -32,25 +32,17 @@ class str
 
   prints a string
   }
-  proc print 1 0
+  push proc print 1 0
     str.workingtemp swap put disc
     
-    0
-    do
+    str.workingtemp read
+    str.size . read
 
-      copy
-      str.workingtemp read
-      str.data . +
-      readc dump
-      
-      1 +
-      
-      copy
-      str.workingtemp read
-      str.size . read
-      <
-    end
-    disc
+    str.workingtemp read
+    str.data .
+
+    1 1 sys3 disc
+
     ret
   end
   
@@ -60,7 +52,7 @@ class str
 
   prints a string followed by a new line
   }
-  proc println 1 0
+  push proc println 1 0
     (str.print)
     (cstr.cr)
 
@@ -73,7 +65,7 @@ class str
   
   gets the length of a string
   }
-  proc len 1 1
+  push proc len 1 1
     str.size . read
 
     ret
@@ -85,7 +77,7 @@ class str
   
   gets the length of a string
   }
-  proc endaddr 1 1
+  push proc endaddr 1 1
     str.workingtemp swap put disc
     
     str.workingtemp read str.data .
@@ -100,7 +92,7 @@ class str
   
   concatinates 2 strings
   }
-  proc cat 2 1
+  push proc cat 2 1
     swap str.workingtemp swap put disc
 
     copy (str.len)
@@ -125,7 +117,7 @@ class str
     copy (str.len)
     swap str.data .
     swap
-    (mem.copy)
+    (mem.cpy)
     
     (str.len)
     str.workingtemp read (str.len) +
@@ -137,7 +129,7 @@ class str
     ret
   end
   
-  proc catc 2 1
+  push proc catc 2 1
     swap str.workingtemp swap put disc
 
     copy (cstr.len)
@@ -159,7 +151,7 @@ class str
     str.workingtemp read (str.endaddr)
     swap
     copy (cstr.len)
-    (mem.copy)
+    (mem.cpy)
     
     (cstr.len)
     str.workingtemp read (str.len) +
@@ -171,7 +163,7 @@ class str
     ret
   end
 
-  proc put 3 1
+  push proc sput 3 1
     swap str.rawtemp swap put disc
     swap str.workingtemp swap put disc
   
@@ -192,7 +184,7 @@ class str
     str.workingtemp read
     str.data . swap
     str.rawtemp read
-    (mem.copy)
+    (mem.cpy)
     
     str.workingtemp read
     str.size .
@@ -204,7 +196,7 @@ class str
     ret
   end
 
-  proc eq 2 1
+  push proc eq 2 1
     covr (str.len)
     covr (cstr.len) != if [ disc disc bool.false ret ]
 
@@ -217,9 +209,24 @@ class str
     swap disc
 
     ret
+  end  
+
+  push proc seq 2 1
+    covr (str.len)
+    covr (str.len) != if [ disc disc bool.false ret ]
+
+    covr str.data .
+    covr str.data .
+    copy (str.len)
+    (mem.eq)
+
+    swap disc
+    swap disc
+
+    ret
   end
   
-  proc free 1 0
+  push proc free 1 0
     (heap.free)
     
     ret

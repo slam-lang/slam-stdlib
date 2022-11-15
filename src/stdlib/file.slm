@@ -1,0 +1,31 @@
+inc "stdlib/os.slm"
+
+class file
+  const BUFFSIZE 64
+
+  prop fp int.SIZE
+  prop buffer BUFFSIZE
+
+  var result int.SIZE
+  var mode int.SIZE
+
+  push proc open 2 1
+    file.mode swap put disc
+
+    file.result
+    int.SIZE 1 *
+    BUFFSIZE 1 * +
+    (heap.alloc)
+    put disc
+
+    511 swap
+    file.mode read swap
+    -100
+    (os.open)
+    file.result read file.fp . swap put disc
+
+    file.result read
+
+    ret
+  end
+end

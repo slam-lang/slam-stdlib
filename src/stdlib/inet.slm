@@ -14,13 +14,13 @@ class sockaddr
 
   var temp int.SIZE
 
-  proc reset 1 1
+  push proc reset 1 1
     copy 16 (mem.zero)
 
     ret
   end
 
-  proc setfamily 2 1
+  push proc setfamily 2 1
     swap sockaddr.temp swap put disc
 
     sockaddr.FAMI_MASK &&
@@ -33,7 +33,7 @@ class sockaddr
     ret
   end
   
-  proc setaddr 2 1
+  push proc setaddr 2 1
     swap sockaddr.temp swap put disc
 
     sockaddr.ADDR_MASK &&
@@ -46,7 +46,7 @@ class sockaddr
     ret
   end
 
-  proc setport 2 1
+  push proc setport 2 1
     swap sockaddr.temp swap put disc
     
     copy 00ffh &&      0100h *
@@ -80,7 +80,7 @@ class net
   {
   args: ptr[data] int[port]
   }
-  proc open 2 1
+  push proc open 2 1
     net.port swap put disc
     net.temp swap put disc
 
@@ -132,7 +132,7 @@ class net
     ret
   end
   
-  proc poll 1 1
+  push proc poll 1 1
     net.temp swap put disc
     
     net.temp read net.clilen .
@@ -157,13 +157,13 @@ class net
   result: int[read] ptr[inet]
 
   }
-  proc read 3 2
+  push proc read 3 2
     net.buff swap put disc
     swap net.temp swap put disc
     
     net.buff read (cstr.clear)
     net.temp read net.connfd . read
-    (os.read)
+    (os.readf)
 
     net.temp read
     swap
@@ -176,7 +176,7 @@ class net
   result: int[read] ptr[inet]
 
   }
-  proc write 2 1
+  push proc write 2 1
     swap net.temp swap put disc
 
     copy (cstr.len) swap
@@ -187,7 +187,7 @@ class net
     ret
   end
 
-  proc finish 1 1
+  push proc finish 1 1
     copy
     net.connfd .
     copy read (os.close)
@@ -197,7 +197,7 @@ class net
     ret
   end
   
-  proc close 1 0
+  push proc close 1 0
     net.fd .
     read (os.close)
 
@@ -220,12 +220,12 @@ class http
   result: ptr[http]
 
   }
-  proc setserver 2 1
+  push proc setserver 2 1
     swap http.temp swap put disc
 
     http.temp read http.server .
     swap
-    (cstr.copy) swap disc disc
+    (cstr.cpy) swap disc disc
 
     http.temp read
     ret
@@ -236,7 +236,7 @@ class http
   result: ptr[buffer] ptr[http]
 
   }
-  proc getheader 3 2
+  push proc getheader 3 2
     swap (cstr.clear)
     swap http.resp swap put disc
     swap http.temp swap put disc
@@ -258,7 +258,7 @@ class http
   {
   args 
   }
-  proc parseurl 2 2
+  push proc parseurl 2 2
     13 {\r} http.getline (cstr.split) swap disc
     ' ' http.gettemp (cstr.split) disc
     ' ' http.geturl (cstr.split) swap disc

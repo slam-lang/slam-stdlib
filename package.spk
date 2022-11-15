@@ -1,3 +1,4 @@
 "src" src
 "stdlib.slm" lib
+"stdlib.sl2" lib
 "stdlib/" libd

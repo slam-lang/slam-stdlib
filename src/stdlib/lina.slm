@@ -10,7 +10,7 @@ class matrix
   var temp 8
   var tempval 8
 
-  proc new 2 1
+  push proc new 2 1
     covr covr *
     int.SIZE *
     16 +
@@ -30,7 +30,7 @@ class matrix
     ret
   end
 
-  proc get 3 2
+  push proc get 3 2
     matrix.temp swap put disc
     swap matrix.curtemp swap put disc
     matrix.temp read
@@ -48,7 +48,7 @@ class matrix
     ret
   end
   
-  proc set 4 1
+  push proc set 4 1
     matrix.temp swap put disc
     swap matrix.tempval swap put disc
     swap matrix.curtemp swap put disc

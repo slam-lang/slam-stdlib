@@ -12,8 +12,10 @@ class cstr
   var tempmax 1
   var tempmul 1
   
-  proc len 1 1
-    copy readc 0 == if [disc 0 ret]
+  push proc len 1 1
+    copy readc 0 == if [
+      disc 0 ret
+    ]
     copy
     do
       1 +
@@ -31,7 +33,7 @@ class cstr
   
   prints a string
   }
-  proc print 1 0
+  push proc print 1 0
     copy (cstr.len) swap 1 1 sys3 disc
 
     ret
@@ -43,7 +45,7 @@ class cstr
   
   prints a new line
   }
-  proc cr 0 0
+  push proc cr 0 0
     { print new line }
     `\n` 1 1 sys3 disc
     ret
@@ -52,7 +54,7 @@ class cstr
   {
   prints
   }
-  proc println 1 0
+  push proc println 1 0
     (cstr.print)
     (cstr.cr)
     ret
@@ -65,10 +67,10 @@ class cstr
   
   compares strings, returns 1 if they are not equal
   }
-  proc eq 2 1
+  push proc eq 2 1
     covr readc
     covr readc
-    != if [disc disc bool.false ret]
+    != if [ disc disc bool.false ret ]
     1 -
     swap
     1 -
@@ -112,7 +114,7 @@ class cstr
   
   copy a string from a pointer to another
   }
-  proc copy 2 2
+  push proc cpy 2 2
     covr
     covr
     do
@@ -131,12 +133,13 @@ class cstr
     putc
     disc
     disc
+
     ret
   end
   
   {
   }
-  proc last 1 1
+  push proc last 1 1
     1 -
     do
       1 +
@@ -149,8 +152,8 @@ class cstr
     ret
   end
 
-  proc clear 1 1
-    copy readc 0 == if [ret]
+  push proc clear 1 1
+    copy readc 0 == if [ ret ]
     copy
     do
       copy
@@ -166,9 +169,9 @@ class cstr
     ret
   end
   
-  proc cat 2 1
+  push proc cat 2 1
     covr copy (cstr.len) +
-    swap (cstr.copy) disc disc
+    swap (cstr.cpy) disc disc
 
     ret
   end
@@ -179,7 +182,7 @@ class cstr
   
   returns 1 if the string is a number
   }
-  proc isnum 1 1
+  push proc isnum 1 1
     cstr.tempmin '0' putc disc
     cstr.tempmax '9' putc disc
   
@@ -193,7 +196,7 @@ class cstr
     ]
     disc
     copy readc
-    '-' == if [1 +]
+    '-' == if [ 1 + ]
     do
       copy readc
       copy cstr.tempmin readc <
@@ -223,7 +226,7 @@ class cstr
   
   returns the value of a int
   }
-  proc tonum 1 1
+  push proc tonum 1 1
     copy (cstr.isnum) ! if [
       copy (cstr.println)
       "String is not a number" (cstr.println)
@@ -276,7 +279,7 @@ class cstr
  
   splits a string on the delim
   }
-  proc split 3 2
+  push proc split 3 2
     swap cstr.delim swap putc disc
     cstr.tempstore swap put disc
   
@@ -309,15 +312,16 @@ class int
   prop data 8
 
   var tmpidx 8
+  var tmpresult 32
  
-  proc gettmp 0 1
-    var 32 30 +
+  push proc gettmp 0 1
+    int.tmpresult 30 +
     int.tmpidx read -
 
     ret
   end
 
-  proc inctmpidx 0 0
+  push proc inctmpidx 0 0
     int.tmpidx 
     int.tmpidx read 1 +
     putc disc
@@ -325,7 +329,7 @@ class int
     ret
   end
 
-  proc cstr 1 1
+  push proc cstr 1 1
     do
       10 /%
       '0' +
@@ -343,11 +347,11 @@ class int
     ret
   end
 
-  proc cstrhex 1 1
+  push proc cstrhex 1 1
     do
       16 /%
-      copy 9 > if ['a' 10 - +]
-      copy 10 < if ['0' +]
+      copy 9 > if [ 'a' 10 - + ]
+      copy 10 < if [ '0' + ]
       (int.gettmp)
       swap
       putc disc
@@ -374,7 +378,7 @@ class int
   
   converts a int to a string
   }
-  proc print 1 0
+  push proc print 1 0
     (int.cstr) (cstr.print) (cstr.cr)
     
     int.tmpidx 0 putc disc
@@ -387,11 +391,11 @@ class int
   
   converts a int to a hex string
   }
-  proc printhex 1 0
+  push proc printhex 1 0
     do
       16 /%
-      copy 9 > if ['a' 10 - +]
-      copy 10 < if ['0' +]
+      copy 9 > if [ 'a' 10 - + ]
+      copy 10 < if [ '0' + ]
       (int.gettmp)
       swap
       putc disc

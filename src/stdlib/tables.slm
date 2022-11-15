@@ -27,7 +27,7 @@ class tab
   
   construct a table
   }
-  proc new 2 1
+  push proc new 2 1
     swap tab.entrytmp swap put disc
     tab.curtmp
     covr (heap.alloc)
@@ -47,7 +47,7 @@ class tab
     ret
   end
   
-  proc curentryaddr 1 2
+  push proc curentryaddr 1 2
     tab.curtmp read
     tab.Data .
     covr
@@ -72,7 +72,7 @@ class tab
   
   puts data into a table
   }
-  proc put 3 1
+  push proc put 3 1
     tab.valuetmp swap put disc
     tab.entrytmp swap put disc
     tab.curtmp swap put disc
@@ -103,7 +103,7 @@ class tab
     
     swap disc
   
-    tab.entrytmp read (cstr.copy) disc
+    tab.entrytmp read (cstr.cpy) disc
     tab.curtmp read
     tab.Entry . read +
     tab.valuetmp read put disc
@@ -118,7 +118,7 @@ class tab
   
   prints a table
   }
-  proc print 1 0
+  push proc print 1 0
     tab.curtmp swap put disc
   
     0
@@ -145,7 +145,7 @@ class tab
   
   gets a key from the table
   }
-  proc get 2 2
+  push proc get 2 2
     tab.entrytmp swap put disc
     tab.curtmp swap put disc
     
@@ -188,7 +188,7 @@ class tab
   
   checks if a value is in a table
   }
-  proc in 2 2
+  push proc in 2 2
     tab.entrytmp swap put disc
     tab.curtmp swap put disc
   
@@ -220,7 +220,7 @@ class tab
   }
   {TODO} 
 
-  proc free 1 0
+  push proc free 1 0
     (heap.free)
 
     ret

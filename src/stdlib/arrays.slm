@@ -1,5 +1,5 @@
-inc stdlib/mem.slm
-inc stdlib.slm
+inc "stdlib/mem.slm"
+inc "stdlib.slm"
 
 class arr
   prop Size int.SIZE
@@ -23,7 +23,7 @@ class seq
 
   Creates an seq
   }
-  proc new 2 1
+  push proc new 2 1
     copy (heap.zalloc) seq.curtemp swap put disc
     seq.elemtemp swap put disc
 
@@ -52,7 +52,7 @@ class seq
   args: int[size] ptr[seqay]
   returns: ptr[seqay]
   }
-  proc setlen 2 1
+  push proc setlen 2 1
     swap seq.curtemp swap put disc
 
     seq.curtemp read
@@ -68,7 +68,7 @@ class seq
   args: ptr[seqay]
   returns: int[size] ptr[seqay]
   }
-  proc len 1 2
+  push proc len 1 2
     copy
     seq.Size . read
   
@@ -79,7 +79,7 @@ class seq
   args: ptr[data] ptr[seqay]
   returs: ptr[seqay]
   }
-  proc pushint 2 1
+  push proc pushint 2 1
     seq.elemtemp swap put disc
     seq.curtemp swap put disc
     
@@ -93,7 +93,7 @@ class seq
     
     seq.curtemp read
     seq.Max . read
-    > if ["ARRAY OVERFLOW" (cstr.println) -1 quit]
+    > if [ "ARRAY OVERFLOW" (cstr.println) -1 quit ]
     
     seq.curtemp read
     seq.Elem . read
@@ -123,7 +123,7 @@ class seq
   args: ptr[data] ptr[seqay]
   returs: ptr[seqay]
   }
-  proc push 2 1
+  push proc pushptr 2 1
     seq.elemtemp swap put disc
     seq.curtemp swap put disc
     
@@ -137,7 +137,7 @@ class seq
     
     seq.curtemp read
     seq.Max . read
-    > if ["ARRAY OVERFLOW" (cstr.println) -1 quit]
+    > if [ "ARRAY OVERFLOW" (cstr.println) -1 quit ]
     
     seq.curtemp read
     seq.Elem . read
@@ -154,7 +154,7 @@ class seq
     
     seq.curtemp read
     seq.Elem . read
-    (mem.copy)
+    (mem.cpy)
     
     seq.curtemp read
     seq.Size .
@@ -166,7 +166,7 @@ class seq
     ret
   end
 
-  proc extend 2 1
+  push proc extend 2 1
     swap seq.curtemp swap put disc
 
     seq.curtemp read
@@ -182,13 +182,13 @@ class seq
     ret
   end
   
-  proc getaddr 2 2 
+  push proc getaddr 2 2 
     swap seq.curtemp swap put disc
   
     copy
     seq.curtemp read
     seq.Size . read
-    > if [ "INDEX ERROR" (cstr.println) disc -1 quit ]
+    > if [ NULL ret ]
     
     seq.curtemp read
     seq.Elem . read
@@ -204,7 +204,7 @@ class seq
     ret
   end
   
-  proc print 1 0
+  push proc print 1 0
     seq.curtemp swap put disc
     "[" (cstr.print)
     seq.curtemp read
@@ -244,7 +244,7 @@ class seq
     ret
   end
 
-  proc popaddr 1 2
+  push proc popaddr 1 2
     seq.curtemp swap put disc
     
     seq.curtemp read
@@ -275,7 +275,7 @@ class seq
     ret
   end
 
-  proc pop 1 2
+  push proc pop 1 2
     seq.curtemp swap put disc
     
     seq.curtemp read
@@ -296,7 +296,7 @@ class seq
 
     seq.curtemp read
     seq.Elem . read
-    (mem.copy) 
+    (mem.cpy) 
 
     
     seq.curtemp read
@@ -315,13 +315,13 @@ class seq
     ret
   end
 
-  proc free 1 0
+  push proc free 1 0
     (heap.free)
   
     ret
   end
 
-  {TODO: proc in 2 2}
+  {TODO: push proc in 2 2}
 end
 
 class llentry
@@ -330,14 +330,14 @@ class llentry
   prop next int.SIZE
   prop data 0
  
-  proc new 1 1
+  push proc new 1 1
     8 +
     (heap.zalloc)
 
     ret
   end
 
-  proc free 1 0
+  push proc free 1 0
     copy llentry.next . read
     copy NULL != if [
       copy (llentry.free)
@@ -349,7 +349,7 @@ class llentry
     ret
   end
 
-  proc last 1 1
+  push proc last 1 1
     copy llentry.next . read
     NULL == if [
       ret
@@ -361,7 +361,27 @@ class llentry
     ret
   end
 
-  proc ptrat 2 1
+  push proc pop 1 1
+    copy llentry.next . read
+    NULL == if [
+      ret
+    ]
+    
+    copy llentry.next . read
+    (llentry.pop)
+
+    copy llentry.next . read
+    llentry.next . read
+    NULL == if [
+      copy llentry.next . NULL put disc
+    ]
+
+    disc
+
+    ret
+  end
+
+  push proc ptrat 2 1
     copy 0 == if [
       disc
       llentry.next . read
@@ -378,13 +398,13 @@ class llentry
     ret
   end
 
-  proc append 2 1
+  push proc append 2 1
     covr llentry.next . swap put disc
       
     ret
   end
   
-  proc print 2 1
+  push proc print 2 1
     covr llentry.data .
     covr () disc
     
@@ -409,7 +429,7 @@ class llist
 
   var curtemp int.SIZE
 
-  proc new 1 1
+  push proc new 1 1
     16 (heap.zalloc)
 
     covr
@@ -419,7 +439,7 @@ class llist
     ret
   end
 
-  proc free 1 0
+  push proc free 1 0
     copy llist.root . read
     copy NULL != if [
       copy (llentry.free)
@@ -431,16 +451,23 @@ class llist
     ret
   end
 
-  proc last 1 2
-    copy llist.root . read NULL == if [NULL ret]
+  push proc last 1 2
+    copy llist.root . read NULL == if [ NULL ret ]
     copy llist.root . read (llentry.last)
     
     ret
   end
 
-  proc len 1 1
+  push proc pop 1 2
+    copy llist.root . read NULL == if [ NULL ret ]
+    copy llist.root . read (llentry.pop)
+    
+    ret
+  end
+
+  push proc len 1 1
     {TODO: Implement}
-    copy llist.root . read NULL == if [disc 0 ret]
+    copy llist.root . read NULL == if [ disc 0 ret ]
     llist.root . read
     NULL swap
     do
@@ -455,7 +482,7 @@ class llist
     ret
   end 
   
-  proc ptrat 2 1
+  push proc ptrat 2 1
     swap llist.curtemp swap put disc
 
     copy 0 == if [
@@ -473,7 +500,7 @@ class llist
     ret
   end
 
-  proc append 2 1
+  push proc append 2 1
     swap llist.curtemp swap put disc
 
     llist.curtemp read
@@ -491,7 +518,7 @@ class llist
       
       llist.curtemp read
       llist.entry . read
-      (mem.copy)
+      (mem.cpy)
 
       llist.curtemp read
       ret
@@ -513,14 +540,14 @@ class llist
 
     llist.curtemp read
     llist.entry . read
-    (mem.copy)
+    (mem.cpy)
     
     llist.curtemp read
 
     ret
   end
 
-  proc print 2 1
+  push proc print 2 1
     covr llist.root . read
     covr
 
@@ -531,6 +558,109 @@ class llist
     disc
     disc
 
+    ret
+  end
+end
+
+class dlist
+  prop max int.SIZE
+  prop size int.SIZE
+  prop elemsize int.SIZE
+  prop data 0
+
+  const STEP 8
+
+  var tmp int.SIZE
+
+  push proc new 1 1
+    dlist.tmp
+    covr dlist.STEP * 24 + (heap.zalloc)
+    put disc
+
+    dlist.tmp read dlist.max . covr dlist.STEP * put disc
+    dlist.tmp read dlist.size . 0 put disc
+    dlist.tmp read dlist.elemsize . swap put disc
+
+    dlist.tmp read
+
+    ret
+  end
+
+  push proc free 1 0
+    (heap.free)
+
+    ret
+  end
+
+  push proc len 1 1
+ 
+    dlist.size . read
+
+    ret
+  end
+
+  push proc ptrat 2 1
+    swap
+    dlist.tmp swap put disc
+
+    dlist.tmp read dlist.size . read
+    covr > ! if [
+      disc NULL ret
+    ]
+
+    dlist.tmp read dlist.elemsize . read *
+    dlist.tmp read dlist.data . +
+
+    ret
+  end
+
+  push proc last 1 2
+    dlist.tmp swap put disc
+
+    dlist.tmp read
+    dlist.tmp read
+    dlist.tmp read dlist.size . read 1 -
+    (dlist.ptrat)
+    
+    ret
+  end
+
+  push proc append 2 1
+    swap
+    dlist.tmp swap put disc
+
+    dlist.tmp read dlist.size . read 1 +
+    dlist.tmp read dlist.elemsize . read *
+    dlist.tmp read dlist.max . read < ! if [
+      dlist.tmp read dlist.max . read
+      dlist.tmp read dlist.elemsize . read
+      dlist.STEP * + 24 +
+
+      dlist.tmp read swap (heap.realloc)
+      dlist.tmp swap put disc
+
+      dlist.tmp read dlist.max .
+
+      dlist.tmp read dlist.max . read
+      dlist.tmp read dlist.elemsize . read
+      dlist.STEP * +
+
+      put disc
+    ]
+    
+    dlist.tmp read dlist.size . read
+    dlist.tmp read dlist.elemsize . read *
+    dlist.tmp read dlist.data . +
+    swap
+
+    dlist.tmp read dlist.elemsize . read
+    (mem.cpy)
+
+    dlist.tmp read dlist.size .
+    copy read 1 +
+    put disc
+
+    dlist.tmp read
     ret
   end
 end
