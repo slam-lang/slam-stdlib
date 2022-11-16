@@ -1,4 +1,4 @@
-inc stdlib.slm
+inc "stdlib.slm"
 
 class strutil
   var tempstore int.SIZE

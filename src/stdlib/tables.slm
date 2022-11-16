@@ -9,8 +9,8 @@ TODO: remove
 TODO: defrag
 }
 
-inc stdlib/mem.slm
-inc stdlib.slm
+inc "stdlib/mem.slm"
+inc "stdlib.slm"
 
 class tab
   prop Max int.SIZE
@@ -72,7 +72,7 @@ class tab
   
   puts data into a table
   }
-  push proc put 3 1
+  push proc putp 3 1
     tab.valuetmp swap put disc
     tab.entrytmp swap put disc
     tab.curtmp swap put disc
@@ -92,7 +92,7 @@ class tab
       1 +
       (tab.curentryaddr)
 
-      copy NULL == if [disc ret]
+      copy NULL == if [ disc ret ]
       
       copy read NULL ==
       swap tab.entrytmp read (cstr.eq) ||
@@ -124,7 +124,7 @@ class tab
     0
     do
       (tab.curentryaddr)
-      copy NULL == if [disc disc ret]
+      copy NULL == if [ disc disc ret ]
   
       copy (cstr.print) ":" (cstr.print)
       tab.curtmp read
@@ -162,9 +162,9 @@ class tab
     do
       1 +
       (tab.curentryaddr)
-      copy NULL == if [disc NULL ret]
+      copy NULL == if [ disc NULL ret ]
   
-      copy readc NULL == if [disc NULL ret]
+      copy readc NULL == if [ disc NULL ret ]
   
       tab.entrytmp read (cstr.eq) !
     end
@@ -197,9 +197,9 @@ class tab
     do
       1 +
       (tab.curentryaddr)
-      copy NULL == if [disc disc bool.false ret]
+      copy NULL == if [ disc disc bool.false ret ]
   
-      copy readc NULL == if [disc disc bool.false ret]
+      copy readc NULL == if [ disc disc bool.false ret ]
   
       tab.entrytmp read (cstr.eq) !
     end

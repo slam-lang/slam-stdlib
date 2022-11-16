@@ -5,7 +5,6 @@ class arr
   prop Size int.SIZE
   prop Elem int.SIZE
   prop pData int.SIZE
-
 end
 
 class seq
@@ -481,6 +480,24 @@ class llist
 
     ret
   end 
+
+  var calltmp int.SIZE
+
+  push proc foreach 2 0
+    llist.calltmp swap put disc
+
+    llist.root . read
+    copy NULL == if [ disc ret ]
+    do
+      copy llentry.data . llist.calltmp read () disc 
+
+      llentry.next . read
+      copy NULL !=
+    end
+    disc
+    
+    ret
+  end
   
   push proc ptrat 2 1
     swap llist.curtemp swap put disc
@@ -610,6 +627,27 @@ class dlist
 
     dlist.tmp read dlist.elemsize . read *
     dlist.tmp read dlist.data . +
+
+    ret
+  end
+
+  push proc pop 1 1
+    dlist.tmp swap put disc
+
+    dlist.tmp read dlist.size . read
+    0 == if [
+      NULL ret
+    ]
+
+    dlist.tmp read
+    dlist.tmp read
+    dlist.tmp read dlist.size . read 1 -
+    (dlist.ptrat)
+    swap disc
+
+    dlist.tmp read dlist.size .
+    copy read 1 -
+    put disc
 
     ret
   end

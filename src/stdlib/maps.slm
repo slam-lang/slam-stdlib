@@ -220,6 +220,34 @@ class map
     ret
   end
 
+  var calltmp int.SIZE
+
+  push proc foreach 2 0
+    map.calltmp swap put disc
+    map.curtemp swap put disc
+    0
+    do
+      copy int.SIZE *
+      map.curtemp read
+      map.dataarray . +
+      read
+      copy NULL != if [
+        copy map.calltmp read (llist.foreach)
+      ]
+      disc
+
+      1 +
+     
+      copy
+      map.curtemp read
+      map.count . read
+      <
+    end
+    disc
+
+    ret
+  end
+
   push proc free 1 0
     map.curtemp swap put disc
     0

@@ -1,5 +1,5 @@
-inc stdlib/log.slm
-inc stdlib.slm
+inc "stdlib/log.slm"
+inc "stdlib.slm"
 
 class testin
   push proc setup 1 0
