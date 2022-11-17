@@ -1,0 +1,22 @@
+class loop
+  var iterator int.SIZE
+  var block int.SIZE
+
+  oper proc foreach 3 0
+    loop.block swap put disc
+    loop.iterator swap put disc
+    copy NULL != if
+      do
+        loop.iterator read ()
+        copy NULL != if
+          copy loop.block read ()
+        end
+
+        NULL !=
+      end
+    end
+    disc
+
+    ret
+  end
+end
