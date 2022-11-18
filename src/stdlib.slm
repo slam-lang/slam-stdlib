@@ -12,10 +12,10 @@ class cstr
   var tempmax 1
   var tempmul 1
   
-  push proc len 1 1
-    copy readc 0 == if [
+  oper proc len 1 1
+    copy readc 0 == if
       disc 0 ret
-    ]
+    end
     copy
     do
       1 +
@@ -33,8 +33,8 @@ class cstr
   
   prints a string
   }
-  push proc print 1 0
-    copy (cstr.len) swap 1 1 sys3 disc
+  oper proc print 1 0
+    copy cstr.len swap 1 1 sys3 disc
 
     ret
   end
@@ -45,7 +45,7 @@ class cstr
   
   prints a new line
   }
-  push proc cr 0 0
+  oper proc cr 0 0
     { print new line }
     `\n` 1 1 sys3 disc
     ret
@@ -54,9 +54,9 @@ class cstr
   {
   prints
   }
-  push proc println 1 0
-    (cstr.print)
-    (cstr.cr)
+  oper proc println 1 0
+    cstr.print
+    cstr.cr
     ret
   end
 
@@ -67,39 +67,33 @@ class cstr
   
   compares strings, returns 1 if they are not equal
   }
-  push proc eq 2 1
+  oper proc eq 2 1
     covr readc
     covr readc
-    != if [ disc disc bool.false ret ]
+    != if disc disc bool.false ret end
     1 -
-    swap
-    1 -
+    swap 1 -
     do
       1 +
-      swap
-      1 +
+      swap 1 +
       covr readc
       covr readc
       covr 0 ==
       covr 0 == &&
-      if [
-        disc
-        disc
-        disc
-        disc
+      if
+        disc disc
+        disc disc
         bool.true
         ret
-        ]
+      end
       covr 0 ==
       covr 0 == ||
-      if [
-        disc
-        disc
-        disc
-        disc
+      if
+        disc disc
+        disc disc
         bool.false
         ret
-      ]
+      end
       ==
     end
     disc
@@ -114,7 +108,7 @@ class cstr
   
   copy a string from a pointer to another
   }
-  push proc cpy 2 2
+  oper proc cpy 2 2
     covr
     covr
     do
@@ -138,8 +132,12 @@ class cstr
   end
   
   {
+  args: ptr[cstr]
+  rets: int[char]
+
+  Get the last char in a cstring
   }
-  push proc last 1 1
+  oper proc last 1 1
     1 -
     do
       1 +
@@ -152,8 +150,8 @@ class cstr
     ret
   end
 
-  push proc clear 1 1
-    copy readc 0 == if [ ret ]
+  oper proc clear 1 1
+    copy readc 0 == if ret end
     copy
     do
       copy
@@ -169,9 +167,9 @@ class cstr
     ret
   end
   
-  push proc cat 2 1
-    covr copy (cstr.len) +
-    swap (cstr.cpy) disc disc
+  oper proc cat 2 1
+    covr copy cstr.len +
+    swap cstr.cpy disc disc
 
     ret
   end
@@ -186,7 +184,7 @@ class cstr
     cstr.tempmin '0' putc disc
     cstr.tempmax '9' putc disc
   
-    copy copy (cstr.len) + 1 -
+    copy copy cstr.len + 1 -
     readc 
     copy 'b' == if [
       cstr.tempmax '1' putc disc
@@ -205,7 +203,7 @@ class cstr
         disc
         copy readc 'b' ==  
         covr readc 'h' == ||
-        covr (cstr.len) 1 == &&
+        covr cstr.len 1 == &&
         swap disc
         ret
       ]
@@ -228,15 +226,15 @@ class cstr
   }
   push proc tonum 1 1
     copy (cstr.isnum) ! if [
-      copy (cstr.println)
-      "String is not a number" (cstr.println)
+      copy cstr.println
+      "String is not a number" cstr.println
       disc
       -1 quit
     ]
       
     cstr.tempmul 10 putc disc
     
-    copy copy (cstr.len) + 1 -
+    copy copy cstr.len + 1 -
     copy readc 'b' == if [
       cstr.tempmul 2 putc disc
     ]
@@ -283,7 +281,7 @@ class cstr
     swap cstr.delim swap putc disc
     cstr.tempstore swap put disc
   
-    cstr.tempstore read (cstr.clear)
+    cstr.tempstore read cstr.clear
 
     {cstr}
     do
@@ -379,7 +377,7 @@ class int
   converts a int to a string
   }
   push proc print 1 0
-    (int.cstr) (cstr.print) (cstr.cr)
+    (int.cstr) cstr.print cstr.cr
     
     int.tmpidx 0 putc disc
     ret
@@ -415,9 +413,9 @@ class int
     putc disc
     (int.inctmpidx)
   
-    (int.gettmp) 1 + (cstr.print)
+    (int.gettmp) 1 + cstr.print
     int.tmpidx 0 putc disc
-    (cstr.cr)
+    cstr.cr
     ret
   end
 end
