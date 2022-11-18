@@ -3,8 +3,8 @@ inc "stdlib.slm"
 
 class testin
   push proc setup 1 0
-    "- " (cstr.print)
-    (cstr.print)
+    "- " cstr.print
+    cstr.print
 
     ret
   end
@@ -12,7 +12,7 @@ class testin
   push proc done 0 0
     2 1 (log.level)
 
-    (cstr.cr)
+    cstr.cr
     
     ret
   end
@@ -25,12 +25,12 @@ class testin
   end
   
   push proc cstreq 2 0
-    covr covr (cstr.eq) ! if [
-      " - Assertion Failed `" (cstr.print)
-      (cstr.print)
-      "` != `" (cstr.print)
-      (cstr.print)
-      "`" (cstr.println)
+    covr covr cstr.eq ! if [
+      " - Assertion Failed `" cstr.print
+      cstr.print
+      "` != `" cstr.print
+      cstr.print
+      "`" cstr.println
 
       255 quit
     ]
@@ -42,11 +42,11 @@ class testin
 
   push proc eq 2 0
     covr covr != if [
-      " - Assertion Failed `" (cstr.print)
-      (int.cstr) (cstr.print)
-      "` != `" (cstr.print)
-      (int.cstr) (cstr.print)
-      "`" (cstr.println)
+      " - Assertion Failed `" cstr.print
+      (int.cstr) cstr.print
+      "` != `" cstr.print
+      (int.cstr) cstr.print
+      "`" cstr.println
 
       255 quit
     ]
@@ -58,9 +58,9 @@ class testin
   
   push proc true 1 0
     copy 0 == if [
-      " - Assertion Failed " (cstr.print)
-      (int.cstr) (cstr.print)
-      " is not true" (cstr.println)
+      " - Assertion Failed " cstr.print
+      (int.cstr) cstr.print
+      " is not true" cstr.println
       
       255 quit
     ]
@@ -71,9 +71,9 @@ class testin
   
   push proc false 1 0
     copy 0 != if [
-      " - Assertion Failed " (cstr.print)
-      (int.cstr) (cstr.print)
-      " is not false" (cstr.println)
+      " - Assertion Failed " cstr.print
+      (int.cstr) cstr.print
+      " is not false" cstr.println
 
       255 quit
     ]

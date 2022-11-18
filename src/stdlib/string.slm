@@ -54,7 +54,7 @@ class str
   }
   push proc println 1 0
     (str.print)
-    (cstr.cr)
+    cstr.cr
 
     ret
   end
@@ -132,11 +132,11 @@ class str
   push proc catc 2 1
     swap str.workingtemp swap put disc
 
-    copy (cstr.len)
+    copy cstr.len
     str.workingtemp read (str.len) +
     str.workingtemp read str.max . read
     > if [
-      copy (cstr.len)
+      copy cstr.len
       str.workingtemp read (str.len) +
       str.STEP +
       copy
@@ -150,10 +150,10 @@ class str
     copy
     str.workingtemp read (str.endaddr)
     swap
-    copy (cstr.len)
+    copy cstr.len
     (mem.cpy)
     
-    (cstr.len)
+    cstr.len
     str.workingtemp read (str.len) +
     str.workingtemp read str.size .
     swap put disc
@@ -198,11 +198,11 @@ class str
 
   push proc eq 2 1
     covr (str.len)
-    covr (cstr.len) != if [ disc disc bool.false ret ]
+    covr cstr.len != if [ disc disc bool.false ret ]
 
     covr str.data .
     covr
-    copy (cstr.len)
+    copy cstr.len
     (mem.eq)
 
     swap disc

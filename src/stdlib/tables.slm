@@ -58,7 +58,7 @@ class tab
     tab.curtmp read
     tab.Max . read
     > if [
-      "TABLE OVERFLOW" (cstr.println)
+      "TABLE OVERFLOW" cstr.println
       disc disc 0 ret
     ]
     +
@@ -80,9 +80,9 @@ class tab
     tab.curtmp read
     tab.Entry . read
     
-    tab.entrytmp read (cstr.len) < if [
-      "STRING TOO LONG FOR TABLE" (cstr.println)
-      tab.entrytmp read (cstr.println)
+    tab.entrytmp read cstr.len < if [
+      "STRING TOO LONG FOR TABLE" cstr.println
+      tab.entrytmp read cstr.println
       -1
       quit
     ]
@@ -95,7 +95,7 @@ class tab
       copy NULL == if [ disc ret ]
       
       copy read NULL ==
-      swap tab.entrytmp read (cstr.eq) ||
+      swap tab.entrytmp read cstr.eq ||
       !
     end
   
@@ -103,7 +103,7 @@ class tab
     
     swap disc
   
-    tab.entrytmp read (cstr.cpy) disc
+    tab.entrytmp read cstr.cpy disc
     tab.curtmp read
     tab.Entry . read +
     tab.valuetmp read put disc
@@ -126,7 +126,7 @@ class tab
       (tab.curentryaddr)
       copy NULL == if [ disc disc ret ]
   
-      copy (cstr.print) ":" (cstr.print)
+      copy cstr.print ":" cstr.print
       tab.curtmp read
       tab.Entry . read +
       read (int.print)
@@ -151,9 +151,9 @@ class tab
     
     tab.curtmp read
     tab.Entry . read
-    tab.entrytmp read (cstr.len) < if [
-      "STRING TOO LONG FOR TABLE" (cstr.println)
-      tab.entrytmp read (cstr.println)
+    tab.entrytmp read cstr.len < if [
+      "STRING TOO LONG FOR TABLE" cstr.println
+      tab.entrytmp read cstr.println
       -1
       quit
     ]
@@ -166,7 +166,7 @@ class tab
   
       copy readc NULL == if [ disc NULL ret ]
   
-      tab.entrytmp read (cstr.eq) !
+      tab.entrytmp read cstr.eq !
     end
     (tab.curentryaddr)
     tab.curtmp read
@@ -201,7 +201,7 @@ class tab
   
       copy readc NULL == if [ disc disc bool.false ret ]
   
-      tab.entrytmp read (cstr.eq) !
+      tab.entrytmp read cstr.eq !
     end
     disc
     disc

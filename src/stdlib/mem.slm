@@ -117,7 +117,7 @@ class heap
     heap.endaddr swap put disc
 
     BRK sys1 0 < if [
-      "could not allocate heap" (cstr.println)
+      "could not allocate heap" cstr.println
     ]
 
     ret
@@ -147,9 +147,9 @@ class heap
   push proc map 0 0
     heap.usedtemp 0 put disc
 
-    "HEAP MAP" (cstr.println)
-    "--------" (cstr.println)
-    "size:   " (cstr.print)
+    "HEAP MAP" cstr.println
+    "--------" cstr.println
+    "size:   " cstr.print
     heap.endaddr read
     heap.startaddr read
     - (int.print)
@@ -158,10 +158,10 @@ class heap
     do
       heap.HEAP_STEP +
       copy (heapentry.isentry) if [
-        "Object" (cstr.println)
-        "  addr: " (cstr.print)
+        "Object" cstr.println
+        "  addr: " cstr.print
         copy (int.printhex)
-        "  size: " (cstr.print)
+        "  size: " cstr.print
         copy heapentry.Size . read
         copy heap.usedtemp read +
         heap.usedtemp swap put disc
@@ -174,10 +174,10 @@ class heap
     end
     disc
     
-    "used: " (cstr.print)
+    "used: " cstr.print
 
     heap.usedtemp read (int.print)
-    (cstr.cr)
+    cstr.cr
 
     ret
   end
@@ -242,7 +242,7 @@ class heap
   push proc free 1 0
     heapentry.SIZE -
     copy (heapentry.isentry) ! if [
-      "Bad free call" (cstr.println)
+      "Bad free call" cstr.println
       (int.printhex) ret
     ]
    
@@ -283,7 +283,7 @@ class heap
 
     copy
     heapentry.SIZE - (heapentry.isentry) ! if [
-      "Bad realloc call" (cstr.println)
+      "Bad realloc call" cstr.println
       copy heapentry.SIZE - (int.printhex) ret
     ]
     copy (heap.free)

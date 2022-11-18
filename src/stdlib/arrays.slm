@@ -22,7 +22,7 @@ class seq
 
   Creates an seq
   }
-  push proc new 2 1
+  oper proc new 2 1
     copy (heap.zalloc) seq.curtemp swap put disc
     seq.elemtemp swap put disc
 
@@ -51,7 +51,7 @@ class seq
   args: int[size] ptr[seqay]
   returns: ptr[seqay]
   }
-  push proc setlen 2 1
+  oper proc setlen 2 1
     swap seq.curtemp swap put disc
 
     seq.curtemp read
@@ -67,7 +67,7 @@ class seq
   args: ptr[seqay]
   returns: int[size] ptr[seqay]
   }
-  push proc len 1 2
+  oper proc len 1 2
     copy
     seq.Size . read
   
@@ -78,7 +78,7 @@ class seq
   args: ptr[data] ptr[seqay]
   returs: ptr[seqay]
   }
-  push proc pushint 2 1
+  oper proc pushint 2 1
     seq.elemtemp swap put disc
     seq.curtemp swap put disc
     
@@ -92,7 +92,10 @@ class seq
     
     seq.curtemp read
     seq.Max . read
-    > if [ "ARRAY OVERFLOW" (cstr.println) -1 quit ]
+    > if
+      "ARRAY OVERFLOW" cstr.println
+      -1 quit
+    end
     
     seq.curtemp read
     seq.Elem . read
@@ -122,7 +125,7 @@ class seq
   args: ptr[data] ptr[seqay]
   returs: ptr[seqay]
   }
-  push proc pushptr 2 1
+  oper proc pushptr 2 1
     seq.elemtemp swap put disc
     seq.curtemp swap put disc
     
@@ -136,7 +139,10 @@ class seq
     
     seq.curtemp read
     seq.Max . read
-    > if [ "ARRAY OVERFLOW" (cstr.println) -1 quit ]
+    > if 
+      "ARRAY OVERFLOW" cstr.println
+      -1 quit
+    end
     
     seq.curtemp read
     seq.Elem . read
@@ -165,7 +171,7 @@ class seq
     ret
   end
 
-  push proc extend 2 1
+  oper proc extend 2 1
     swap seq.curtemp swap put disc
 
     seq.curtemp read
@@ -181,13 +187,15 @@ class seq
     ret
   end
   
-  push proc getaddr 2 2 
+  oper proc getaddr 2 2 
     swap seq.curtemp swap put disc
   
     copy
     seq.curtemp read
     seq.Size . read
-    > if [ NULL ret ]
+    > if 
+      NULL ret
+    end
     
     seq.curtemp read
     seq.Elem . read
@@ -205,21 +213,21 @@ class seq
   
   push proc print 1 0
     seq.curtemp swap put disc
-    "[" (cstr.print)
+    "[" cstr.print
     seq.curtemp read
-    seq.Data . (cstr.print)
+    seq.Data . cstr.print
     
     seq.curtemp read
     seq.Size . read
 
-    1 == if [
-      "]" (cstr.println)
+    1 == if
+      "]" cstr.println
       ret
-    ]
+    end
 
     0
     do
-      ", " (cstr.print)
+      ", " cstr.print
 
       1 +
       copy
@@ -229,7 +237,7 @@ class seq
     
       seq.curtemp read
       seq.Data .
-      + (cstr.print)
+      + cstr.print
  
       copy
       seq.curtemp read
@@ -238,7 +246,7 @@ class seq
     end
     disc
 
-    "]" (cstr.println)
+    "]" cstr.println
     
     ret
   end
@@ -338,9 +346,9 @@ class llentry
 
   push proc free 1 0
     copy llentry.next . read
-    copy NULL != if [
+    copy NULL != if
       copy (llentry.free)
-    ]
+    end
     disc
 
     (heap.free)
@@ -350,9 +358,9 @@ class llentry
 
   push proc last 1 1
     copy llentry.next . read
-    NULL == if [
+    NULL == if
       ret
-    ]
+    end
     
     llentry.next . read
     (llentry.last)
@@ -362,18 +370,18 @@ class llentry
 
   push proc pop 1 1
     copy llentry.next . read
-    NULL == if [
+    NULL == if
       ret
-    ]
+    end
     
     copy llentry.next . read
     (llentry.pop)
 
     copy llentry.next . read
     llentry.next . read
-    NULL == if [
+    NULL == if
       copy llentry.next . NULL put disc
-    ]
+    end
 
     disc
 
@@ -381,12 +389,12 @@ class llentry
   end
 
   push proc ptrat 2 1
-    copy 0 == if [
+    copy 0 == if
       disc
       llentry.next . read
       llentry.data .
       ret
-    ]
+    end
 
     1 -
     covr llentry.next . read
@@ -410,10 +418,10 @@ class llentry
     covr llentry.next . read
     covr
 
-    covr NULL != if [
-      ", " (cstr.print)
+    covr NULL != if
+      ", " cstr.print
       (llentry.print) 0
-    ]
+    end
     disc
     disc
     disc
@@ -440,9 +448,9 @@ class llist
 
   push proc free 1 0
     copy llist.root . read
-    copy NULL != if [
+    copy NULL != if
       copy (llentry.free)
-    ]
+    end
     disc
 
     (heap.free)
@@ -451,14 +459,14 @@ class llist
   end
 
   push proc last 1 2
-    copy llist.root . read NULL == if [ NULL ret ]
+    copy llist.root . read NULL == if NULL ret end
     copy llist.root . read (llentry.last)
     
     ret
   end
 
   push proc pop 1 2
-    copy llist.root . read NULL == if [ NULL ret ]
+    copy llist.root . read NULL == if NULL ret end
     copy llist.root . read (llentry.pop)
     
     ret
@@ -466,7 +474,7 @@ class llist
 
   push proc len 1 1
     {TODO: Implement}
-    copy llist.root . read NULL == if [ disc 0 ret ]
+    copy llist.root . read NULL == if disc 0 ret end
     llist.root . read
     NULL swap
     do
@@ -487,7 +495,8 @@ class llist
     llist.calltmp swap put disc
 
     llist.root . read
-    copy NULL == if [ disc ret ]
+    copy NULL == if disc ret end
+
     do
       copy llentry.data . llist.calltmp read () disc 
 
@@ -502,12 +511,12 @@ class llist
   push proc ptrat 2 1
     swap llist.curtemp swap put disc
 
-    copy 0 == if [
+    copy 0 == if
       disc
       llist.curtemp read llist.root . read
       llentry.data .
       ret
-    ]
+    end
 
     1 -
     llist.curtemp read llist.root . read
@@ -523,7 +532,7 @@ class llist
     llist.curtemp read
     (llist.last) swap disc
 
-    NULL == if [
+    NULL == if
       llist.curtemp read
       llist.entry . read
       (llentry.new)
@@ -539,7 +548,7 @@ class llist
 
       llist.curtemp read
       ret
-    ]
+    end
     
     llist.curtemp read
     llist.entry . read
@@ -568,9 +577,9 @@ class llist
     covr llist.root . read
     covr
 
-    covr NULL != if [
+    covr NULL != if
       (llentry.print) 0
-    ]
+    end
     disc
     disc
     disc
@@ -621,9 +630,9 @@ class dlist
     dlist.tmp swap put disc
 
     dlist.tmp read dlist.size . read
-    covr > ! if [
+    covr > ! if
       disc NULL ret
-    ]
+    end
 
     dlist.tmp read dlist.elemsize . read *
     dlist.tmp read dlist.data . +
@@ -635,9 +644,9 @@ class dlist
     dlist.tmp swap put disc
 
     dlist.tmp read dlist.size . read
-    0 == if [
+    0 == if
       NULL ret
-    ]
+    end
 
     dlist.tmp read
     dlist.tmp read
@@ -669,7 +678,7 @@ class dlist
 
     dlist.tmp read dlist.size . read 1 +
     dlist.tmp read dlist.elemsize . read *
-    dlist.tmp read dlist.max . read < ! if [
+    dlist.tmp read dlist.max . read < ! if
       dlist.tmp read dlist.max . read
       dlist.tmp read dlist.elemsize . read
       dlist.STEP * + 24 +
@@ -684,7 +693,7 @@ class dlist
       dlist.STEP * +
 
       put disc
-    ]
+    end
     
     dlist.tmp read dlist.size . read
     dlist.tmp read dlist.elemsize . read *

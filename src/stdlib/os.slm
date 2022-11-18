@@ -92,7 +92,7 @@ class os
   
   push proc chkdeverr 1 0
     0 < ! if [ ret ]
-    "ERROR: cant open /dev/null" (cstr.println)
+    "ERROR: cant open /dev/null" cstr.println
   
     -1 quit
     ret
@@ -150,7 +150,7 @@ class os
       ret
     ]
     0 < if [
-      "ERROR" (cstr.println)
+      "ERROR" cstr.println
     ]
     disc
     ret
@@ -180,7 +180,7 @@ class os
       ret
     ]
     0 < if [
-      "ERROR" (cstr.println)
+      "ERROR" cstr.println
     ]
     disc
     ret
@@ -273,7 +273,7 @@ class os
     do
       copy read
       '=' os.tempbuff (cstr.split)
-      os.targ read (cstr.eq) if [
+      os.targ read cstr.eq if [
         swap disc
         ret
       ]
@@ -299,7 +299,7 @@ class os
     sysc.OPENAT sys4
   
     copy 0 < if [
-      "Error opening file" (cstr.println)
+      "Error opening file" cstr.println
       disc -1 quit
     ]
     
@@ -316,7 +316,7 @@ class os
     sysc.WRITE sys3
   
     0 < if [
-      "Error writing file" (cstr.println)
+      "Error writing file" cstr.println
       -1 quit
     ]
     ret
@@ -332,7 +332,7 @@ class os
     sysc.READ sys3
     
     copy 0 < if [
-      "Error reading file" (cstr.println)
+      "Error reading file" cstr.println
       disc -1 quit
     ]
     ret
@@ -348,7 +348,7 @@ class os
     sysc.CLOSE sys1
   
     0 < if [
-      "Error closing file" (cstr.println)
+      "Error closing file" cstr.println
       -1 quit
     ]
     ret

@@ -4,7 +4,7 @@ class strutil
   var tempstore int.SIZE
   
   push proc starts 2 1
-    copy (cstr.len)
+    copy cstr.len
     (mem.eq)
 
     ret

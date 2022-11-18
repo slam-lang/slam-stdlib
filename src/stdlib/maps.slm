@@ -185,13 +185,13 @@ class map
   push proc comma 0 0
     map.pr readc
     ! if [ ret ]
-    ", " (cstr.print)
+    ", " cstr.print
     ret
   end
  
   push proc print 1 0
     map.pr bool.false putc disc
-    "{" (cstr.print)
+    "{" cstr.print
     map.curtemp swap put disc
     0
     do
@@ -215,7 +215,7 @@ class map
     end
     disc
     
-    "}" (cstr.print)
+    "}" cstr.print
 
     ret
   end

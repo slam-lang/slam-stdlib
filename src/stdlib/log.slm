@@ -30,9 +30,9 @@ class log
 
   push proc msg 2 0
     log.curlog
-    log.Mes . (cstr.clear)
+    log.Mes . cstr.clear
     swap
-    (cstr.cpy) disc disc
+    cstr.cpy disc disc
     
     log.curlog
     log.Hint . swap
@@ -44,7 +44,7 @@ class log
 
   push proc cat 1 0
     log.curlog
-    log.Mes . swap (cstr.cat) disc
+    log.Mes . swap cstr.cat disc
 
     ret
   end
@@ -53,47 +53,47 @@ class log
     log.curlog
     log.Crit . readc
     copy 1 == if [
-      "\e[1;31m" (cstr.print)
-      "[" (cstr.print)
+      "\e[1;31m" cstr.print
+      "[" cstr.print
       log.curlog
-      log.Hint . (cstr.print)
-      "]\ " (cstr.print)
+      log.Hint . cstr.print
+      "]\ " cstr.print
       log.curlog
-      log.Mes . (cstr.print)
-      "\e[0;0m" (cstr.println)
+      log.Mes . cstr.print
+      "\e[0;0m" cstr.println
         
       disc ret
     ]
     copy 2 == if [
-      "\e[0;32m" (cstr.print)
-      "[" (cstr.print)
+      "\e[0;32m" cstr.print
+      "[" cstr.print
       log.curlog
-      log.Hint . (cstr.print)
-      "]\ " (cstr.print)
+      log.Hint . cstr.print
+      "]\ " cstr.print
       log.curlog
-      log.Mes . (cstr.print)
-      "\e[0;0m" (cstr.println)
+      log.Mes . cstr.print
+      "\e[0;0m" cstr.println
       disc ret
     ]
     copy 3 == if [
-      "\e[0;33m" (cstr.print)
-      "[" (cstr.print)
+      "\e[0;33m" cstr.print
+      "[" cstr.print
       log.curlog
-      log.Hint . (cstr.print)
-      "]\ " (cstr.print)
+      log.Hint . cstr.print
+      "]\ " cstr.print
       log.curlog
-      log.Mes . (cstr.print)
-      "\e[0;0m" (cstr.println)
+      log.Mes . cstr.print
+      "\e[0;0m" cstr.println
       disc ret
     ]
     disc
-    "[" (cstr.print)
+    "[" cstr.print
     log.curlog
-    log.Hint . (cstr.print)
-    "]\ " (cstr.print)
+    log.Hint . cstr.print
+    "]\ " cstr.print
     log.curlog
 
-    log.Mes . (cstr.println)
+    log.Mes . cstr.println
 
     ret
   end
