@@ -180,33 +180,33 @@ class cstr
   
   returns 1 if the string is a number
   }
-  push proc isnum 1 1
+  oper proc isnum 1 1
     cstr.tempmin '0' putc disc
     cstr.tempmax '9' putc disc
   
     copy copy cstr.len + 1 -
     readc 
-    copy 'b' == if [
+    copy 'b' == if
       cstr.tempmax '1' putc disc
-    ]
-    copy 'h' == if [
+    end
+    copy 'h' == if
       cstr.tempmax 'f' putc disc
-    ]
+    end
     disc
     copy readc
-    '-' == if [ 1 + ]
+    '-' == if 1 + end
     do
       copy readc
       copy cstr.tempmin readc <
       covr cstr.tempmax readc >
-      || if [
+      || if
         disc
         copy readc 'b' ==  
         covr readc 'h' == ||
         covr cstr.len 1 == &&
         swap disc
         ret
-      ]
+      end
       disc
   
       1 +
@@ -224,23 +224,20 @@ class cstr
   
   returns the value of a int
   }
-  push proc tonum 1 1
-    copy (cstr.isnum) ! if [
-      copy cstr.println
-      "String is not a number" cstr.println
-      disc
-      -1 quit
-    ]
+  oper proc int 1 1
+    copy cstr.isnum ! if
+      0
+    end
       
     cstr.tempmul 10 putc disc
     
     copy copy cstr.len + 1 -
-    copy readc 'b' == if [
+    copy readc 'b' == if
       cstr.tempmul 2 putc disc
-    ]
-    copy readc 'h' == if [
+    end
+    copy readc 'h' == if
       cstr.tempmul 16 putc disc
-    ]
+    end
     disc
     
     0
@@ -248,10 +245,10 @@ class cstr
       cstr.tempmul readc *
       covr readc
       copy 'F' 1 + <
-      covr 'A' 1 - > && if [
+      covr 'A' 1 - > && if
         'A' 10 - -
         '0' +
-      ]
+      end
       '0' - +
       
       swap 1 +
@@ -277,7 +274,7 @@ class cstr
  
   splits a string on the delim
   }
-  push proc split 3 2
+  oper proc split 3 2
     swap cstr.delim swap putc disc
     cstr.tempstore swap put disc
   
@@ -287,11 +284,11 @@ class cstr
     do
       covr readc
       cstr.delim readc ==
-      if [
+      if
         disc 1 +
         cstr.tempstore read
         ret
-      ]
+      end
       covr readc
       covr swap
       putc disc
@@ -312,14 +309,14 @@ class int
   var tmpidx 8
   var tmpresult 32
  
-  push proc gettmp 0 1
+  oper proc gettmp 0 1
     int.tmpresult 30 +
     int.tmpidx read -
 
     ret
   end
 
-  push proc inctmpidx 0 0
+  oper proc inctmpidx 0 0
     int.tmpidx 
     int.tmpidx read 1 +
     putc disc
@@ -327,44 +324,44 @@ class int
     ret
   end
 
-  push proc cstr 1 1
+  oper proc cstr 1 1
     do
       10 /%
       '0' +
-      (int.gettmp)
+      int.gettmp
       swap
       putc disc
-      (int.inctmpidx)
+      int.inctmpidx
       
       copy 0 !=
     end
     disc
-    (int.gettmp) 1 +
+    int.gettmp 1 +
     
     int.tmpidx 0 putc disc
     ret
   end
 
-  push proc cstrhex 1 1
+  oper proc cstrhex 1 1
     do
       16 /%
       copy 9 > if [ 'a' 10 - + ]
       copy 10 < if [ '0' + ]
-      (int.gettmp)
+      int.gettmp
       swap
       putc disc
-      (int.inctmpidx)
+      int.inctmpidx
 
       copy 0 !=
     end
     disc
     
-    (int.gettmp)
+    int.gettmp
     '$'
     putc disc
-    (int.inctmpidx)
+    int.inctmpidx
 
-    (int.gettmp) 1 +
+    int.gettmp 1 +
     
     int.tmpidx 0 putc disc
     ret
@@ -376,8 +373,8 @@ class int
   
   converts a int to a string
   }
-  push proc print 1 0
-    (int.cstr) cstr.print cstr.cr
+  oper proc print 1 0
+    int.cstr cstr.print cstr.cr
     
     int.tmpidx 0 putc disc
     ret
@@ -389,31 +386,31 @@ class int
   
   converts a int to a hex string
   }
-  push proc printhex 1 0
+  oper proc printhex 1 0
     do
       16 /%
       copy 9 > if [ 'a' 10 - + ]
       copy 10 < if [ '0' + ]
-      (int.gettmp)
+      int.gettmp
       swap
       putc disc
-      (int.inctmpidx)
+      int.inctmpidx
 
       copy 0 !=
     end
     disc
   
-    (int.gettmp)
+    int.gettmp
     'x'
     putc disc
-    (int.inctmpidx)
+    int.inctmpidx
   
-    (int.gettmp)
+    int.gettmp
     '0'
     putc disc
-    (int.inctmpidx)
+    int.inctmpidx
   
-    (int.gettmp) 1 + cstr.print
+    int.gettmp 1 + cstr.print
     int.tmpidx 0 putc disc
     cstr.cr
     ret

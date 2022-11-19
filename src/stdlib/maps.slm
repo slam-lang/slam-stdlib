@@ -175,7 +175,7 @@ class map
   end
 
   push proc eprint 1 1
-    copy (int.print)
+    copy int.print
 
     ret
   end

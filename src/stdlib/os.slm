@@ -248,8 +248,8 @@ class os
   }
   push proc args 1 1
     copy argc - 0 < ! if [
-      copy (int.print)
-      "Bad arg" (int.print)
+      copy int.print
+      "Bad arg" int.print
       disc -1 quit
     ]
     int.SIZE * 
@@ -272,7 +272,7 @@ class os
     envp
     do
       copy read
-      '=' os.tempbuff (cstr.split)
+      '=' os.tempbuff cstr.split
       os.targ read cstr.eq if [
         swap disc
         ret

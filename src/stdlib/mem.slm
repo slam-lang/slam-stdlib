@@ -152,7 +152,7 @@ class heap
     "size:   " cstr.print
     heap.endaddr read
     heap.startaddr read
-    - (int.print)
+    - int.print
     heap.startaddr read
     heap.HEAP_STEP -
     do
@@ -160,12 +160,12 @@ class heap
       copy (heapentry.isentry) if [
         "Object" cstr.println
         "  addr: " cstr.print
-        copy (int.printhex)
+        copy int.printhex
         "  size: " cstr.print
         copy heapentry.Size . read
         copy heap.usedtemp read +
         heap.usedtemp swap put disc
-        copy (int.print)
+        copy int.print
         +
         heap.HEAP_STEP -
       ]
@@ -176,7 +176,7 @@ class heap
     
     "used: " cstr.print
 
-    heap.usedtemp read (int.print)
+    heap.usedtemp read int.print
     cstr.cr
 
     ret
@@ -243,7 +243,7 @@ class heap
     heapentry.SIZE -
     copy (heapentry.isentry) ! if [
       "Bad free call" cstr.println
-      (int.printhex) ret
+      int.printhex ret
     ]
    
     heapentry.Flags .
@@ -284,7 +284,7 @@ class heap
     copy
     heapentry.SIZE - (heapentry.isentry) ! if [
       "Bad realloc call" cstr.println
-      copy heapentry.SIZE - (int.printhex) ret
+      copy heapentry.SIZE - int.printhex ret
     ]
     copy (heap.free)
 

@@ -242,7 +242,7 @@ class http
     swap http.temp swap put disc
     
     "HTTP/1.1 " cstr.cat
-    http.resp read (int.cstr) cstr.cat
+    http.resp read int.cstr cstr.cat
     " OK\r\n" cstr.cat
     "Server: " cstr.cat
     http.temp read http.server . cstr.cat
@@ -259,9 +259,9 @@ class http
   args 
   }
   push proc parseurl 2 2
-    13 {\r} http.getline (cstr.split) swap disc
-    ' ' http.gettemp (cstr.split) disc
-    ' ' http.geturl (cstr.split) swap disc
+    13 {\r} http.getline cstr.split swap disc
+    ' ' http.gettemp cstr.split disc
+    ' ' http.geturl cstr.split swap disc
 
     ret
   end

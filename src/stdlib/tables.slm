@@ -129,7 +129,7 @@ class tab
       copy cstr.print ":" cstr.print
       tab.curtmp read
       tab.Entry . read +
-      read (int.print)
+      read int.print
   
       1 +
       (tab.curentryaddr)

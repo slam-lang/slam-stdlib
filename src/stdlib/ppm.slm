@@ -89,14 +89,14 @@ class ppm
     ppm.file read (os.write)
 
     ppm.curtemp read ppm.w . read
-    (int.cstr) copy cstr.len swap
+    int.cstr copy cstr.len swap
     ppm.file read (os.write)
 
     ` `
     ppm.file read (os.write)
 
     ppm.curtemp read ppm.h . read
-    (int.cstr) copy cstr.len swap
+    int.cstr copy cstr.len swap
     ppm.file read (os.write)
 
     `\n255\n`
