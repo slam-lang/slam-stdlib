@@ -211,7 +211,7 @@ class seq
     ret
   end
   
-  push proc print 1 0
+  oper proc print 1 0
     seq.curtemp swap put disc
     "[" cstr.print
     seq.curtemp read
@@ -251,7 +251,7 @@ class seq
     ret
   end
 
-  push proc popaddr 1 2
+  oper proc popaddr 1 2
     seq.curtemp swap put disc
     
     seq.curtemp read
@@ -282,7 +282,7 @@ class seq
     ret
   end
 
-  push proc pop 1 2
+  oper proc pop 1 2
     seq.curtemp swap put disc
     
     seq.curtemp read
@@ -305,7 +305,6 @@ class seq
     seq.Elem . read
     (mem.cpy) 
 
-    
     seq.curtemp read
     seq.Elem . read
     (mem.zero)
@@ -322,7 +321,7 @@ class seq
     ret
   end
 
-  push proc free 1 0
+  oper proc free 1 0
     (heap.free)
   
     ret

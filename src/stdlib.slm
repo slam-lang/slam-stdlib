@@ -317,7 +317,7 @@ class int
   end
 
   oper proc inctmpidx 0 0
-    int.tmpidx 
+    int.tmpidx
     int.tmpidx read 1 +
     putc disc
 
