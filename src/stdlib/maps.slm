@@ -47,14 +47,14 @@ class map
 
   var curtemp int.SIZE
   var entry int.SIZE
-  var temp int.SIZE
+  var tmp int.SIZE
 
   {
   args: int[hashcount] int[entrysize] int[valuesize]
   result: ptr[map]
   }
   push proc new 3 1
-    map.temp swap put read +
+    map.tmp swap put read +
     swap map.entry swap put read
     int.SIZE * 3 8 * + (heap.zalloc)
     map.curtemp swap put disc 
@@ -65,7 +65,7 @@ class map
    
     map.curtemp read
     map.keysize .
-    map.temp read
+    map.tmp read
     put disc
    
     map.curtemp read
@@ -88,9 +88,9 @@ class map
   end
  
   push proc putat 3 1
-    map.temp swap put disc
+    map.tmp swap put disc
     swap map.curtemp swap put disc
-    map.temp read
+    map.tmp read
 
     swap
 
@@ -120,7 +120,7 @@ class map
     map.curtemp read
     map.dataarray . +
 
-    copy read NULL == if [
+    copy read NULL == if
       copy
       map.curtemp read
       map.entrysize . read
@@ -136,7 +136,7 @@ class map
       map.entry read (heap.free)
 
       ret
-    ]
+    end
     read
     copy
     llist.root . read
@@ -145,7 +145,7 @@ class map
       covr llentry.data .
       map.curtemp read
       map.keysize . read
-      (mem.eq) if [
+      (mem.eq) if
         map.entry read
         covr llentry.data . swap
 
@@ -158,7 +158,7 @@ class map
 
         map.curtemp read
         ret
-      ]
+      end
  
       llentry.next . read
       copy NULL !=
@@ -184,7 +184,7 @@ class map
 
   push proc comma 0 0
     map.pr readc
-    ! if [ ret ]
+    ! if ret end
     ", " cstr.print
     ret
   end
@@ -199,11 +199,11 @@ class map
       map.curtemp read
       map.dataarray . +
       read
-      copy NULL != if [
+      copy NULL != if
         (map.comma)
         map.pr bool.true putc disc
         copy map.eprint (llist.print) disc
-      ]
+      end
       disc
 
       1 +
@@ -231,9 +231,9 @@ class map
       map.curtemp read
       map.dataarray . +
       read
-      copy NULL != if [
+      copy NULL != if
         copy map.calltmp read (llist.foreach)
-      ]
+      end
       disc
 
       1 +
@@ -256,9 +256,9 @@ class map
       map.curtemp read
       map.dataarray . +
       read
-      copy NULL != if [
+      copy NULL != if
         copy (llist.free)
-      ]
+      end
       disc
 
       1 +
@@ -289,12 +289,12 @@ class map
     map.curtemp read
     map.dataarray . +
     read
-    copy NULL == if [
+    copy NULL == if
       disc
       NULL
       map.curtemp read swap
       ret
-    ]
+    end
     
     llist.root . read
     do
@@ -302,13 +302,13 @@ class map
       covr llentry.data .
       map.curtemp read
       map.keysize . read
-      (mem.eq) if [
+      (mem.eq) if
         llentry.data .
         map.curtemp read
         map.keysize . read +
         map.curtemp read swap
         ret
-      ]
+      end
  
       llentry.next . read
       copy NULL !=
@@ -336,12 +336,12 @@ class map
     map.curtemp read
     map.dataarray . +
     read
-    copy NULL == if [
+    copy NULL == if
       disc
       bool.false
       map.curtemp read swap
       ret
-    ]
+    end
     
     llist.root . read
     do
@@ -349,12 +349,12 @@ class map
       covr llentry.data .
       map.curtemp read
       map.keysize . read
-      (mem.eq) if [
+      (mem.eq) if
         disc
         bool.true
         map.curtemp read swap
         ret
-      ]
+      end
  
       llentry.next . read
       copy NULL !=
@@ -370,7 +370,7 @@ class map
   push proc len 1 2
     map.curtemp swap put disc
     
-    map.temp 0 put disc
+    map.tmp 0 put disc
     
     0
     do
@@ -378,11 +378,11 @@ class map
       map.curtemp read
       map.dataarray . +
       read
-      copy NULL != if [
+      copy NULL != if 
         copy (llist.len)
-        map.temp read +
-        map.temp swap put disc
-      ]
+        map.tmp read +
+        map.tmp swap put disc
+      end
       disc
 
       1 +
@@ -395,7 +395,7 @@ class map
     disc
     
     map.curtemp read
-    map.temp read
+    map.tmp read
 
     ret
   end

@@ -8,10 +8,12 @@ class bool
 end
 
 class cstr
-  var tempmin 1
-  var tempmax 1
-  var tempmul 1
-  
+  var tempmin 8
+  var tempmax 8
+  var tempmul 8
+
+  var tmp 8
+
   oper proc len 1 1
     copy readc 0 == if
       disc 0 ret
@@ -265,7 +267,7 @@ class cstr
     ret
   end
 
-  var delim 1
+  var delim 8
   var tempstore 8
 
   {
@@ -299,6 +301,21 @@ class cstr
       covr read 0 !=
     end
     
+    ret
+  end
+
+  push proc iter 1 2
+    cstr.tmp swap put disc
+
+    cstr.tmp read readc 0 == if
+      NULL
+      NULL
+      ret
+    end
+
+    cstr.tmp read 1 +
+    cstr.tmp read 
+
     ret
   end
 end
@@ -345,8 +362,8 @@ class int
   oper proc cstrhex 1 1
     do
       16 /%
-      copy 9 > if [ 'a' 10 - + ]
-      copy 10 < if [ '0' + ]
+      copy 9 > if 'a' 10 - + end
+      copy 10 < if '0' + end
       int.gettmp
       swap
       putc disc
@@ -389,8 +406,8 @@ class int
   oper proc printhex 1 0
     do
       16 /%
-      copy 9 > if [ 'a' 10 - + ]
-      copy 10 < if [ '0' + ]
+      copy 9 > if 'a' 10 - + end
+      copy 10 < if '0' + end
       int.gettmp
       swap
       putc disc

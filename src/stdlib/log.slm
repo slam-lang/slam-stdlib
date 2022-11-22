@@ -52,7 +52,7 @@ class log
   push proc log 0 0
     log.curlog
     log.Crit . readc
-    copy 1 == if [
+    copy 1 == if
       "\e[1;31m" cstr.print
       "[" cstr.print
       log.curlog
@@ -63,8 +63,8 @@ class log
       "\e[0;0m" cstr.println
         
       disc ret
-    ]
-    copy 2 == if [
+    end
+    copy 2 == if
       "\e[0;32m" cstr.print
       "[" cstr.print
       log.curlog
@@ -74,8 +74,8 @@ class log
       log.Mes . cstr.print
       "\e[0;0m" cstr.println
       disc ret
-    ]
-    copy 3 == if [
+    end
+    copy 3 == if
       "\e[0;33m" cstr.print
       "[" cstr.print
       log.curlog
@@ -85,7 +85,7 @@ class log
       log.Mes . cstr.print
       "\e[0;0m" cstr.println
       disc ret
-    ]
+    end
     disc
     "[" cstr.print
     log.curlog

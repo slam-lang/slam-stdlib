@@ -506,7 +506,7 @@ class llist
     
     ret
   end
-  
+
   push proc ptrat 2 1
     swap llist.curtemp swap put disc
 

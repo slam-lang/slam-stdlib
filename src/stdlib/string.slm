@@ -98,7 +98,7 @@ class str
     copy (str.len)
     str.workingtemp read (str.len) +
     str.workingtemp read str.max . read
-    > if [
+    > if
       copy (str.len)
       str.workingtemp read (str.len) +
       str.STEP +
@@ -108,7 +108,7 @@ class str
       str.workingtemp read swap
       (heap.realloc)
       str.workingtemp swap put disc
-    ]
+    end
     
     copy
     str.workingtemp read (str.endaddr)
@@ -135,7 +135,7 @@ class str
     copy cstr.len
     str.workingtemp read (str.len) +
     str.workingtemp read str.max . read
-    > if [
+    > if
       copy cstr.len
       str.workingtemp read (str.len) +
       str.STEP +
@@ -145,7 +145,7 @@ class str
       str.workingtemp read swap
       (heap.realloc)
       str.workingtemp swap put disc
-    ]
+    end
     
     copy
     str.workingtemp read (str.endaddr)
@@ -170,7 +170,7 @@ class str
     str.rawtemp read
     str.workingtemp read
     str.max . read >
-    if [
+    if
       str.workingtemp read
       str.rawtemp read
       str.STEP +
@@ -179,7 +179,7 @@ class str
       swap put disc
       (heap.realloc)
       str.workingtemp swap put disc
-    ]
+    end
    
     str.workingtemp read
     str.data . swap
@@ -198,7 +198,7 @@ class str
 
   push proc eq 2 1
     covr (str.len)
-    covr cstr.len != if [ disc disc bool.false ret ]
+    covr cstr.len != if disc disc bool.false ret end
 
     covr str.data .
     covr
@@ -213,7 +213,7 @@ class str
 
   push proc seq 2 1
     covr (str.len)
-    covr (str.len) != if [ disc disc bool.false ret ]
+    covr (str.len) != if disc disc bool.false ret end
 
     covr str.data .
     covr str.data .

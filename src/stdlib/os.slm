@@ -15,6 +15,8 @@ class sysc
 
   12  BRK
 
+  16  IOCTL
+
   33  DUP2
 
   41  SOCKET
@@ -31,7 +33,8 @@ class sysc
       WAIT4
       KILL
 
-  79  GETCWD
+  78  GETDENTS
+      GETCWD
 
   257 OPENAT
   end
@@ -91,7 +94,7 @@ class os
   end
   
   push proc chkdeverr 1 0
-    0 < ! if [ ret ]
+    0 < ! if ret end
     "ERROR: cant open /dev/null" cstr.println
   
     -1 quit
@@ -115,7 +118,7 @@ class os
   }
   push proc execcmd 1 0
     (os.fork)
-    copy 0 == if [
+    copy 0 == if
       {child}
       1 {stdin}
       0
@@ -136,8 +139,8 @@ class os
       disc disc
       -1
       quit
-    ]
-    copy 0 > if [
+    end
+    copy 0 > if
       {parent}
   
       NULL
@@ -148,17 +151,17 @@ class os
       (os.chkdeverr)
       disc disc
       ret
-    ]
-    0 < if [
+    end
+    0 < if
       "ERROR" cstr.println
-    ]
+    end
     disc
     ret
   end
   
   push proc execcmdloud 1 0
     (os.fork)
-    copy 0 == if [
+    copy 0 == if
       {child}
       covr envp swap copy read
     
@@ -166,8 +169,8 @@ class os
       disc disc
       -1
       quit
-    ]
-    copy 0 > if [
+    end
+    copy 0 > if
       {parent}
   
       NULL
@@ -178,10 +181,10 @@ class os
       (os.chkdeverr)
       disc disc
       ret
-    ]
-    0 < if [
+    end
+    0 < if
       "ERROR" cstr.println
-    ]
+    end
     disc
     ret
   end
@@ -200,9 +203,9 @@ class os
       copy read (log.cat)
       int.SIZE +
        
-      copy if [
+      copy if
         " " (log.cat)
-      ]
+      end
       copy read NULL !=
     end
     disc
@@ -227,9 +230,9 @@ class os
       copy read (log.cat)
       int.SIZE +
        
-      copy if [
+      copy if
         " " (log.cat)
-      ]
+      end
       copy read NULL !=
     end
     disc
@@ -247,11 +250,11 @@ class os
   gets the nth arguent from the command line
   }
   push proc args 1 1
-    copy argc - 0 < ! if [
+    copy argc - 0 < ! if
       copy int.print
       "Bad arg" int.print
       disc -1 quit
-    ]
+    end
     int.SIZE * 
     argv +
   
@@ -273,10 +276,10 @@ class os
     do
       copy read
       '=' os.tempbuff cstr.split
-      os.targ read cstr.eq if [
+      os.targ read cstr.eq if
         swap disc
         ret
-      ]
+      end
       disc
 
       int.SIZE +
@@ -298,10 +301,10 @@ class os
   push proc open 4 1
     sysc.OPENAT sys4
   
-    copy 0 < if [
+    copy 0 < if
       "Error opening file" cstr.println
       disc -1 quit
-    ]
+    end
     
     ret
   end
@@ -315,10 +318,10 @@ class os
   push proc write 3 0
     sysc.WRITE sys3
   
-    0 < if [
+    0 < if
       "Error writing file" cstr.println
       -1 quit
-    ]
+    end
     ret
   end
   
@@ -331,10 +334,10 @@ class os
   push proc readf 3 1
     sysc.READ sys3
     
-    copy 0 < if [
+    copy 0 < if
       "Error reading file" cstr.println
       disc -1 quit
-    ]
+    end
     ret
   end
   
@@ -347,10 +350,10 @@ class os
   push proc close 1 0
     sysc.CLOSE sys1
   
-    0 < if [
+    0 < if
       "Error closing file" cstr.println
       -1 quit
-    ]
+    end
     ret
   end
 
@@ -398,9 +401,9 @@ class filestream
     0 swap
     fm.READ swap
     0
-    covr readc '/' != if [
+    covr readc '/' != if
       disc -100
-    ]
+    end
     (os.open)
     filestream.tmp read filestream.fp . swap put disc
 
@@ -419,7 +422,7 @@ class filestream
     filestream.tmp swap put disc
     
     filestream.tmp read filestream.bufferidx . read
-    filestream.BUFFER_SIZE > if [
+    filestream.BUFFER_SIZE > if
       filestream.tmp read filestream.buffera .
       filestream.tmp read filestream.bufferb .
       filestream.BUFFER_SIZE
@@ -439,7 +442,7 @@ class filestream
       filestream.bufferidx . copy
       read filestream.BUFFER_SIZE -
       put disc
-    ]
+    end
 
     filestream.tmp read
     copy filestream.buffera .
@@ -450,6 +453,77 @@ class filestream
     filestream.bufferidx . copy
     read 1 +
     put disc
+
+    ret
+  end
+end
+
+class dirent
+  prop ino int.SIZE
+  prop off int.SIZE
+  prop reclen 2
+  prop name 256
+
+  oper proc getreclen 1 1
+    dirent.reclen . read
+    65535 &&
+
+    ret
+  end
+end
+
+class path
+  prop path int.SIZE
+  prop fd int.SIZE
+  prop buff dirent.SIZE
+
+  var tmp int.SIZE
+
+  oper proc new 1 1
+    path.tmp
+    int.SIZE 2 *
+    dirent.SIZE +
+    (heap.alloc)
+    put disc
+    
+    path.tmp read path.path .
+    swap put disc
+    
+    0
+    65536
+    {TODO: magic num}
+    path.tmp read path.path . read
+    -100
+    sysc.OPENAT
+    sys4
+
+    path.tmp read path.fd .
+    swap put disc
+
+    path.tmp read
+
+    ret
+  end
+
+  push proc iter 1 2
+    path.tmp swap put disc
+
+    32
+    path.tmp read path.buff .
+    path.tmp read path.fd . read
+    sysc.GETDENTS
+    sys3
+    1 < if
+      path.tmp read (heap.free)
+
+      NULL
+      NULL
+
+      ret
+    end
+
+    path.tmp read
+    path.tmp read path.buff .
 
     ret
   end
