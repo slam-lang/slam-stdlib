@@ -300,11 +300,6 @@ class os
   }
   push proc open 4 1
     sysc.OPENAT sys4
-  
-    copy 0 < if
-      "Error opening file" cstr.println
-      disc -1 quit
-    end
     
     ret
   end
@@ -405,6 +400,11 @@ class filestream
       disc -100
     end
     (os.open)
+    copy 0 < if
+      disc
+      filestream.tmp read (heap.free)
+      NULL ret
+    end
     filestream.tmp read filestream.fp . swap put disc
 
     filestream.BUFFER_SIZE 2 *

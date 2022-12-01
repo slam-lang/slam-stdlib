@@ -47,6 +47,9 @@ class mem
     ret
   end
   
+  var tmpsize int.SIZE
+  var tmpalloc int.SIZE
+  
   push proc eq 3 1
     swap mem.tmp swap put disc
 
@@ -98,6 +101,28 @@ class mem
   
     ret
   end
+
+  var tmpset 1
+
+  push proc set 3 0
+    mem.tmp swap put disc
+    mem.tmpset swap putc disc
+    do
+      copy
+      mem.tmpset readc
+      putc disc
+  
+      1 +
+  
+      mem.tmp
+      mem.tmp read
+      1 - put disc
+      mem.tmp read 0 >
+    end
+    disc
+  
+    ret
+  end
 end
 
 class heap
@@ -108,7 +133,7 @@ class heap
   var isinit 1
 
   const HEAP_PAGE 64000
-  const HEAP_STEP 128
+  const HEAP_STEP 32
 
   push proc allocpage 0 0
     heap.endaddr read
@@ -304,6 +329,25 @@ class heap
     heap.result read
     ret
   end
+end
+
+oper proc movemem 3 0
+  mem.tmpsize swap put disc
+
+  swap mem.tmpsize read (heap.alloc)
+  mem.tmpalloc swap put disc
+
+  mem.tmpalloc read swap
+  mem.tmpsize read
+  (mem.cpy)
+
+  mem.tmpalloc read
+  mem.tmpsize read
+  (mem.cpy)
+
+  mem.tmpalloc read (heap.free)
+
+  ret
 end
 
 { TODO }

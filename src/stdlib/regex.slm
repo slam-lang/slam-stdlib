@@ -1,0 +1,90 @@
+inc "stdlib.slm"
+
+class regex
+  var tpattern int.SIZE
+  var mh int.SIZE
+
+  var tc 2
+  var tm 2
+
+  oper proc matchstar 3 1
+    regex.tm swap putc disc
+
+    do
+      covr covr regex.mh read () if 
+        disc disc bool.true ret
+      end
+
+      covr readc regex.tc swap putc disc
+
+      swap 1 +
+      swap
+      regex.tc readc 0 !=
+      regex.tm readc regex.tc readc ==
+      regex.tm readc '.' == || &&
+    end
+    disc
+    disc
+
+    bool.false
+
+    ret
+  end
+
+  oper proc matchhere 2 1
+    copy readc 0 == if disc disc bool.true ret end
+    copy 1 + readc '*' == if
+      copy 2 +
+      swap readc
+      regex.matchstar ret
+    end
+    copy 1 + readc 0 ==
+    covr readc '$' == &&
+    if
+      disc readc 0 == ret
+    end
+    covr readc 0 == if 
+      disc disc bool.false ret
+    end
+    covr readc covr readc ==
+    covr readc '.' == ||
+    if 
+      swap 1 +
+      swap 1 +
+      regex.matchhere
+      ret
+    end
+    disc disc
+
+    bool.false
+
+    ret
+  end
+
+  oper proc match 2 1
+    regex.mh (regex.matchhere) put disc
+
+    regex.tpattern swap put disc
+
+    regex.tpattern read readc '^' == if
+      regex.tpattern read 1 +
+      regex.matchhere
+      ret
+    end
+    
+    do
+      copy
+      regex.tpattern read
+      regex.matchhere if
+        bool.true ret
+      end
+
+      1 +
+      copy read 0 !=
+    end
+    disc
+    bool.false
+
+    ret
+  end
+end

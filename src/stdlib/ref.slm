@@ -1,0 +1,17 @@
+class ref
+  prop marked int.SIZE
+  prop marker int.SIZE
+  prop data int.SIZE
+
+  head oper proc new 0 1
+
+  oper proc mark 1 0
+    copy ref.marked . read 0 == if
+      disc ret
+    end
+    copy ref.marked . 1 put disc
+    copy ref.marker . read ()
+
+    ret
+  end
+end

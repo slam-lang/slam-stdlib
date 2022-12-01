@@ -618,7 +618,6 @@ class dlist
   end
 
   push proc len 1 1
- 
     dlist.size . read
 
     ret
