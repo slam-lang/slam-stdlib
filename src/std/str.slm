@@ -1,0 +1,178 @@
+inc "std/str.slh"
+
+class str
+  oper proc new 0 1
+    str.STEP 16 + heap.zalloc
+
+    copy str.max . str.STEP put disc
+    copy str.size . 0 put disc
+
+    ret
+  end
+
+  oper proc print 1 0
+    var working 8
+
+    working swap put disc
+
+    working read
+    str.size . read
+
+    working read
+    str.data .
+
+    1 1 sys3 disc
+
+    ret
+  end
+
+  oper proc len 1 1
+    str.size . read
+
+    ret
+  end
+
+  oper proc endaddr 1 1
+    var working 8
+
+    working swap put disc
+
+    working read str.data .
+    working read str.len +
+
+    ret
+  end
+
+  oper proc cat 2 1
+    var working 8
+
+    swap working swap put disc
+
+    copy str.len
+    working read str.len +
+    working read str.max . read
+    > if
+      copy str.len
+      working read str.len +
+      str.STEP +
+      copy
+      working read str.max .
+      swap put disc
+      working read swap
+      heap.realloc
+      working swap put disc
+    end
+    
+
+    copy
+    working read str.endaddr
+    swap
+    copy heap.free
+    copy str.len
+    swap str.data .
+    swap
+    mem.cpy
+
+    str.len
+    working read str.len +
+    working read str.size .
+    swap put disc
+
+    working read
+
+    ret
+  end
+
+  oper proc catc 2 1
+    var working 8
+
+    swap working swap put disc
+
+    copy cstr.len
+    working read str.len +
+    working read str.max . read
+    > if
+      copy cstr.len
+      working read str.len +
+      str.STEP +
+      copy
+      working read str.max .
+      swap put disc
+      working read swap
+      heap.realloc
+      working swap put disc
+    end
+
+    copy
+    working read str.endaddr
+    swap
+    copy cstr.len
+    mem.cpy
+
+    cstr.len
+    working read str.len +
+    working read str.size .
+    swap put disc
+
+    working read
+
+    ret
+  end
+
+  oper proc sput 3 1
+    var raw 8
+    var working 8
+
+    swap raw swap put disc
+    swap working swap put disc
+  
+    raw read
+    working read
+    str.max . read >
+    if
+      working read
+      raw read
+      str.STEP +
+      copy
+      working read str.max .
+      swap put disc
+      heap.realloc
+      working swap put disc
+    end
+   
+    working read
+    str.data . swap
+    raw read
+    mem.cpy
+    
+    working read
+    str.size .
+    raw read
+    put disc
+
+    working read
+    
+    ret
+  end
+
+  oper proc free 1 0
+    heap.free
+
+    ret
+  end
+
+  oper proc ceq 2 1
+    covr str.len
+    covr cstr.len != if disc disc bool.false ret end
+
+    covr str.data .
+    covr
+    copy cstr.len
+    mem.eq
+
+    swap disc
+    swap disc
+
+    ret
+  end  
+end

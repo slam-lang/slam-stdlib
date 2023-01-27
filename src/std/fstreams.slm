@@ -1,0 +1,87 @@
+inc "std/fstreams.slh"
+
+class filestream
+  oper proc free 1 0
+    copy filestream.fp @ os.closef
+    heap.free
+
+    ret
+  end
+
+  {
+  args: cstr[name]
+  }
+  oper proc new 1 1
+    var tmp 8
+
+    tmp
+    1041
+    heap.zalloc
+    put disc
+
+    0 swap
+    fm.READ swap
+    0
+    covr readc '/' != if
+      disc -100
+    end
+    os.openf
+    copy 0 < if
+      disc
+      tmp read heap.free
+      NULL ret
+    end
+    tmp read filestream.fp . swap put disc
+
+    filestream.BUFFER_SIZE 2 *
+    tmp read filestream.buffera .
+    tmp read filestream.fp . read
+    os.readf
+    disc
+
+    tmp read
+
+    ret
+  end
+
+  oper proc readchar 1 1
+    var tmp 8
+
+    tmp swap put disc
+    
+    tmp read filestream.bufferidx . read
+    filestream.BUFFER_SIZE > if
+      tmp read filestream.buffera .
+      tmp read filestream.bufferb .
+      filestream.BUFFER_SIZE
+      mem.cpy
+      
+      tmp read filestream.bufferb .
+      filestream.BUFFER_SIZE
+      mem.zero
+
+      filestream.BUFFER_SIZE
+      tmp read filestream.bufferb .
+      tmp read filestream.fp . read
+      os.readf
+      disc
+      
+      tmp read
+      filestream.bufferidx . copy
+      read filestream.BUFFER_SIZE -
+      put disc
+    end
+
+    tmp read
+    copy filestream.buffera .
+    swap filestream.bufferidx . read +
+    readc
+
+    tmp read
+    filestream.bufferidx . copy
+    read 1 +
+    put disc
+
+    ret
+  end
+end

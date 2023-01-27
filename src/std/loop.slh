@@ -1,0 +1,5 @@
+class loop
+  head oper proc foreach 3 0
+  head oper proc while 2 0
+end
+

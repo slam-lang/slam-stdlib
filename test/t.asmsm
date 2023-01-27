@@ -1,0 +1,6519 @@
+format ELF64
+section '.text' executable
+public _start
+; class_bool:
+; class_cstr:
+proc_cstr_len:
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    pop rax
+    push rax
+    push rax
+.blockstart_1: ; do
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_1
+.blockend_1: ; do
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_print:
+    pop rax
+    push rax
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_len
+.blockend_0: ; call
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    push qword 1
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_cr:
+    push qword 1
+    push str_0
+    push qword 1
+    push qword 1
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_println:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_print
+.blockend_0: ; call
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_cr
+.blockend_1: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_eq:
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    add rsp, 8
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_1: ; do
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    push qword 1
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_2: ; if
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    or rax, rbx
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_3: ; if
+    jz .blockend_3
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_3: ; if
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_1
+.blockend_1: ; do
+    add rsp, 8
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_cpy:
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+.blockstart_0: ; do
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_last:
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_0: ; do
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_clear:
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    pop rax
+    push rax
+    push rax
+.blockstart_1: ; do
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_1
+.blockend_1: ; do
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_cat:
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    push rax
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_len
+.blockend_0: ; call
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_cpy
+.blockend_1: ; call
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_isnum:
+    push mem+0; cstr_tempmin
+    push qword 48'
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push mem+8; cstr_tempmax
+    push qword 57'
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    pop rax
+    push rax
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_len
+.blockend_0: ; call
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push qword 98'
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    push mem+8; cstr_tempmax
+    push qword 49'
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 104
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    push mem+8; cstr_tempmax
+    push qword 102
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockend_2: ; if
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 45'
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_3: ; if
+    jz .blockend_3
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockend_3: ; if
+.blockstart_4: ; do
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push mem+0; cstr_tempmin
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push mem+8; cstr_tempmax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    or rax, rbx
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_5: ; if
+    jz .blockend_5
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 98'
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 104
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    or rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_cstr_len
+.blockend_6: ; call
+    push qword 1
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_5: ; if
+    add rsp, 8
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_4
+.blockend_4: ; do
+    add rsp, 8
+    push qword 1
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_int:
+    pop rax
+    push rax
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_isnum
+.blockend_0: ; call
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_1: ; if
+    push mem+16; cstr_tempmul
+    push qword 10
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    pop rax
+    push rax
+    push rax
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_len
+.blockend_2: ; call
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 98'
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_3: ; if
+    jz .blockend_3
+    push mem+16; cstr_tempmul
+    push qword 2
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockend_3: ; if
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 104
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_4: ; if
+    jz .blockend_4
+    push mem+16; cstr_tempmul
+    push qword 16
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockend_4: ; if
+    add rsp, 8
+    push qword 0
+.blockstart_5: ; do
+    push mem+16; cstr_tempmul
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    imul rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push qword 70'
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 65'
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_6: ; if
+    jz .blockend_6
+    push qword 65'
+    push qword 10
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push qword 48'
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockend_6: ; if
+    push qword 48'
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 98'
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 104
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_5
+.blockend_5: ; do
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_split:
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push mem+32; cstr_delim
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push mem+40; cstr_tempstore
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+40; cstr_tempstore
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_clear
+.blockend_0: ; call
+.blockstart_1: ; do
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push mem+32; cstr_delim
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    add rsp, 8
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+40; cstr_tempstore
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_2: ; if
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_1
+.blockend_1: ; do
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_cstr_iter:
+    push mem+24; cstr_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+24; cstr_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push qword 0
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    push mem+24; cstr_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+24; cstr_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_int:
+proc_int_gettmp:
+    push mem+56; int_tmpresult
+    push qword 30
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+48; int_tmpidx
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_int_inctmpidx:
+    push mem+48; int_tmpidx
+    push mem+48; int_tmpidx
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_int_cstr:
+.blockstart_0: ; do
+    push qword 10
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    push qword 48'
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_int_gettmp
+.blockend_1: ; call
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_int_inctmpidx
+.blockend_2: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_int_gettmp
+.blockend_3: ; call
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+48; int_tmpidx
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_int_cstrhex:
+.blockstart_0: ; do
+    push qword 16
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    pop rax
+    push rax
+    push rax
+    push qword 9
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    push qword 97'
+    push qword 10
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 10
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    push qword 48'
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockend_2: ; if
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_int_gettmp
+.blockend_3: ; call
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_int_inctmpidx
+.blockend_4: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_int_gettmp
+.blockend_5: ; call
+    push qword 36'
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_int_inctmpidx
+.blockend_6: ; call
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_int_gettmp
+.blockend_7: ; call
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+48; int_tmpidx
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_int_print:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_int_cstr
+.blockend_0: ; call
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_print
+.blockend_1: ; call
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_cr
+.blockend_2: ; call
+    push mem+48; int_tmpidx
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_int_printhex:
+.blockstart_0: ; do
+    push qword 16
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    pop rax
+    push rax
+    push rax
+    push qword 9
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    push qword 97'
+    push qword 10
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 10
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    push qword 48'
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockend_2: ; if
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_int_gettmp
+.blockend_3: ; call
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_int_inctmpidx
+.blockend_4: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_int_gettmp
+.blockend_5: ; call
+    push qword 120
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_int_inctmpidx
+.blockend_6: ; call
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_int_gettmp
+.blockend_7: ; call
+    push qword 48'
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_8: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_8
+    jmp proc_int_inctmpidx
+.blockend_8: ; call
+.blockstart_9: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_9
+    jmp proc_int_gettmp
+.blockend_9: ; call
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_10: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_10
+    jmp proc_cstr_print
+.blockend_10: ; call
+    push mem+48; int_tmpidx
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_11: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_11
+    jmp proc_cstr_cr
+.blockend_11: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_slash:
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_perc:
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_heapentry:
+proc_heapentry_isentry:
+    pop rax
+    push rax
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_mem:
+proc_mem_cpy:
+    push mem+88; mem_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+.blockstart_1: ; do
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+88; mem_tmp
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+88; mem_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_1
+.blockend_1: ; do
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_mem_eq:
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push mem+88; mem_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+.blockstart_0: ; do
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push mem+88; mem_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    add rsp, 8
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_1: ; if
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push mem+88; mem_tmp
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+    add rsp, 8
+    push qword 1
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_mem_zero:
+    push mem+88; mem_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+.blockstart_0: ; do
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+88; mem_tmp
+    push mem+88; mem_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+88; mem_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_mem_set:
+    push mem+88; mem_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+96; mem_tmpset
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+.blockstart_0: ; do
+    pop rax
+    push rax
+    push rax
+    push mem+96; mem_tmpset
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+88; mem_tmp
+    push mem+88; mem_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+88; mem_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_heap:
+proc_heap_allocpage:
+    push mem+97; heap_endaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 64000
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    push mem+97; heap_endaddr
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push qword 12
+    pop rax
+    pop rdi
+    syscall
+    push rax
+    push mem+97; heap_endaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push str_1
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_println
+.blockend_1: ; call
+.blockend_0: ; if
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_init:
+    push mem+97; heap_isinit
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    push mem+97; heap_isinit
+    push qword 1
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push mem+97; heap_startaddr
+    push qword 0
+    push qword 12
+    pop rax
+    pop rdi
+    syscall
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+97; heap_endaddr
+    push mem+97; heap_startaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_heap_allocpage
+.blockend_1: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_map:
+    push mem+97; heap_usedtemp
+    push qword 0
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push str_2
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_println
+.blockend_0: ; call
+    push str_3
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_println
+.blockend_1: ; call
+    push str_4
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_print
+.blockend_2: ; call
+    push mem+97; heap_endaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push mem+97; heap_startaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_int_print
+.blockend_3: ; call
+    push mem+97; heap_startaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 32
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_4: ; do
+    push qword 32
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_heapentry_isentry
+.blockend_5: ; call
+    pop rbx
+    test rbx, rbx
+.blockstart_6: ; if
+    jz .blockend_6
+    push str_5
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_cstr_println
+.blockend_7: ; call
+    push str_6
+.blockstart_8: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_8
+    jmp proc_cstr_print
+.blockend_8: ; call
+    pop rax
+    push rax
+    push rax
+.blockstart_9: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_9
+    jmp proc_int_printhex
+.blockend_9: ; call
+    push str_7
+.blockstart_10: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_10
+    jmp proc_cstr_print
+.blockend_10: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push mem+97; heap_usedtemp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+97; heap_usedtemp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+.blockstart_11: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_11
+    jmp proc_int_print
+.blockend_11: ; call
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 32
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockend_6: ; if
+    pop rax
+    push rax
+    push rax
+    push mem+97; heap_endaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_4
+.blockend_4: ; do
+    add rsp, 8
+    push str_8
+.blockstart_12: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_12
+    jmp proc_cstr_print
+.blockend_12: ; call
+    push mem+97; heap_usedtemp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_13: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_13
+    jmp proc_int_print
+.blockend_13: ; call
+.blockstart_14: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_14
+    jmp proc_cstr_cr
+.blockend_14: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_alloc:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heap_init
+.blockend_0: ; call
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 32
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push qword 32
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+97; heap_reqsize
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push qword 0
+    push mem+97; heap_startaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 32
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 32
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_1: ; do
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 32
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 32
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    push mem+97; heap_endaddr
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_heap_allocpage
+.blockend_3: ; call
+.blockend_2: ; if
+    pop rax
+    push rax
+    push rax
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_heapentry_isentry
+.blockend_4: ; call
+    pop rbx
+    test rbx, rbx
+.blockstart_5: ; if
+    jz .blockend_5
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    push qword 0
+    push qword 32
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 32
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockend_5: ; if
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    push mem+97; heap_reqsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_1
+.blockend_1: ; do
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    push mem+97; heap_reqsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+97; heap_reqsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_zalloc:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heap_init
+.blockend_0: ; call
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_heap_alloc
+.blockend_1: ; call
+    pop rax
+    push rax
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_mem_zero
+.blockend_2: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_free:
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heapentry_isentry
+.blockend_0: ; call
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    push str_9
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_println
+.blockend_2: ; call
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_int_printhex
+.blockend_3: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_1: ; if
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_tryfree:
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heapentry_isentry
+.blockend_0: ; call
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_1: ; if
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_heap_realloc:
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 32
+    xor rdx, rdx
+    pop rbx
+    pop rax
+    idiv rbx
+    push rax
+    push rdx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push qword 32
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+97; heap_reqsize
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heapentry_isentry
+.blockend_0: ; call
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    push str_10
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_println
+.blockend_2: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_int_printhex
+.blockend_3: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_heap_free
+.blockend_4: ; call
+    push mem+98; heap_result
+    push mem+97; heap_reqsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_heap_alloc
+.blockend_5: ; call
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+98; heap_result
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_mem_cpy
+.blockend_6: ; call
+    push mem+98; heap_result
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_movemem:
+    push mem+96; mem_tmpsize
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push mem+96; mem_tmpsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heap_alloc
+.blockend_0: ; call
+    push mem+96; mem_tmpalloc
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+96; mem_tmpalloc
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push mem+96; mem_tmpsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_mem_cpy
+.blockend_1: ; call
+    push mem+96; mem_tmpalloc
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push mem+96; mem_tmpsize
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_mem_cpy
+.blockend_2: ; call
+    push mem+96; mem_tmpalloc
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_heap_free
+.blockend_3: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_opt:
+; class_log:
+proc_log_level:
+    push mem+98; log_curlog
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+98; log_curlog
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_log_msg:
+    push mem+98; log_curlog
+    push qword 5
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_clear
+.blockend_0: ; call
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_cpy
+.blockend_1: ; call
+    add rsp, 8
+    add rsp, 8
+    push mem+98; log_curlog
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 3
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_mem_cpy
+.blockend_2: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_log_cat:
+    push mem+98; log_curlog
+    push qword 5
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_cstr_cat
+.blockend_0: ; call
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_log_log:
+    push mem+98; log_curlog
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push qword 1
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push str_11
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_print
+.blockend_1: ; call
+    push str_12
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_print
+.blockend_2: ; call
+    push mem+98; log_curlog
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_cstr_print
+.blockend_3: ; call
+    push str_13
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_cstr_print
+.blockend_4: ; call
+    push mem+98; log_curlog
+    push qword 5
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_cstr_print
+.blockend_5: ; call
+    push str_14
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_cstr_println
+.blockend_6: ; call
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 2
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_7: ; if
+    jz .blockend_7
+    push str_15
+.blockstart_8: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_8
+    jmp proc_cstr_print
+.blockend_8: ; call
+    push str_16
+.blockstart_9: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_9
+    jmp proc_cstr_print
+.blockend_9: ; call
+    push mem+98; log_curlog
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_10: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_10
+    jmp proc_cstr_print
+.blockend_10: ; call
+    push str_17
+.blockstart_11: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_11
+    jmp proc_cstr_print
+.blockend_11: ; call
+    push mem+98; log_curlog
+    push qword 5
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_12: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_12
+    jmp proc_cstr_print
+.blockend_12: ; call
+    push str_18
+.blockstart_13: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_13
+    jmp proc_cstr_println
+.blockend_13: ; call
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_7: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 3
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_14: ; if
+    jz .blockend_14
+    push str_19
+.blockstart_15: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_15
+    jmp proc_cstr_print
+.blockend_15: ; call
+    push str_20
+.blockstart_16: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_16
+    jmp proc_cstr_print
+.blockend_16: ; call
+    push mem+98; log_curlog
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_17: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_17
+    jmp proc_cstr_print
+.blockend_17: ; call
+    push str_21
+.blockstart_18: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_18
+    jmp proc_cstr_print
+.blockend_18: ; call
+    push mem+98; log_curlog
+    push qword 5
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_19: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_19
+    jmp proc_cstr_print
+.blockend_19: ; call
+    push str_22
+.blockstart_20: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_20
+    jmp proc_cstr_println
+.blockend_20: ; call
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_14: ; if
+    add rsp, 8
+    push str_23
+.blockstart_21: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_21
+    jmp proc_cstr_print
+.blockend_21: ; call
+    push mem+98; log_curlog
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_22: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_22
+    jmp proc_cstr_print
+.blockend_22: ; call
+    push str_24
+.blockstart_23: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_23
+    jmp proc_cstr_print
+.blockend_23: ; call
+    push mem+98; log_curlog
+    push qword 5
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_24: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_24
+    jmp proc_cstr_println
+.blockend_24: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_sysc:
+; class_fm:
+; class_time:
+; class_statresult:
+; class_os:
+proc_os_fork:
+    push qword 57
+    pop rax
+    syscall
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_chkdeverr:
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    push str_25
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_println
+.blockend_1: ; call
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_fexists:
+    push mem+234; os_statbuff
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 4
+    pop rax
+    pop rdi
+    pop rsi
+    syscall
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rax
+    xor rax, 1
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_execcmd:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_os_fork
+.blockend_0: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    push qword 1
+    push qword 0
+    push qword 0
+    push str_26
+    push qword -100
+    push qword 257
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    pop r10
+    syscall
+    push rax
+    pop rax
+    push rax
+    push rax
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_os_chkdeverr
+.blockend_2: ; call
+    push qword 33
+    pop rax
+    pop rdi
+    pop rsi
+    syscall
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_os_chkdeverr
+.blockend_3: ; call
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    mov rax, [args_ptr]
+    mov rax, [rax]
+    add rax, 2
+    shl rax, 3
+    mov rbx, [args_ptr]
+    add rbx, rax
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 59
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_4: ; if
+    jz .blockend_4
+    push qword 0
+    push qword 0
+    push mem+226; os_waitsig
+    push qword -1
+    push qword 61
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    pop r10
+    syscall
+    push rax
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_os_chkdeverr
+.blockend_5: ; call
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_4: ; if
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_6: ; if
+    jz .blockend_6
+    push str_27
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_cstr_println
+.blockend_7: ; call
+.blockend_6: ; if
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_execcmdloud:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_os_fork
+.blockend_0: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    mov rax, [args_ptr]
+    mov rax, [rax]
+    add rax, 2
+    shl rax, 3
+    mov rbx, [args_ptr]
+    add rbx, rax
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 59
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    push qword 0
+    push qword 0
+    push mem+226; os_waitsig
+    push qword -1
+    push qword 61
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    pop r10
+    syscall
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_os_chkdeverr
+.blockend_3: ; call
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_2: ; if
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_4: ; if
+    jz .blockend_4
+    push str_28
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_cstr_println
+.blockend_5: ; call
+.blockend_4: ; if
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_execcmdecho:
+    push qword 0
+    push qword 1
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_log_level
+.blockend_0: ; call
+    push str_29
+    push str_30
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_log_msg
+.blockend_1: ; call
+    pop rax
+    push rax
+    push rax
+.blockstart_2: ; do
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_log_cat
+.blockend_3: ; call
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_4: ; if
+    jz .blockend_4
+    push str_31
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_log_cat
+.blockend_5: ; call
+.blockend_4: ; if
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_2
+.blockend_2: ; do
+    add rsp, 8
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_log_log
+.blockend_6: ; call
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_os_execcmd
+.blockend_7: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_execcmdecholoud:
+    push qword 0
+    push qword 1
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_log_level
+.blockend_0: ; call
+    push str_32
+    push str_33
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_log_msg
+.blockend_1: ; call
+    pop rax
+    push rax
+    push rax
+.blockstart_2: ; do
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_log_cat
+.blockend_3: ; call
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_4: ; if
+    jz .blockend_4
+    push str_34
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_log_cat
+.blockend_5: ; call
+.blockend_4: ; if
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_2
+.blockend_2: ; do
+    add rsp, 8
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_log_log
+.blockend_6: ; call
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_os_execcmdloud
+.blockend_7: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_args:
+    pop rax
+    push rax
+    push rax
+    mov rax, [args_ptr]
+    mov rax, [rax]
+    push rax
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rax
+    xor rax, 1
+    push rax
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    pop rax
+    push rax
+    push rax
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_int_print
+.blockend_1: ; call
+    push str_35
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_int_print
+.blockend_2: ; call
+    add rsp, 8
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_0: ; if
+    push qword 8
+    pop rax
+    pop rbx
+    imul rax, rbx
+    push rax
+    mov rax, [args_ptr]
+    add rax, 8
+    push rax
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_env:
+    push mem+234; os_targ
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    mov rax, [args_ptr]
+    mov rax, [rax]
+    add rax, 2
+    shl rax, 3
+    mov rbx, [args_ptr]
+    add rbx, rax
+    push rbx
+.blockstart_0: ; do
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 61'
+    push mem+234; os_tempbuff
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_split
+.blockend_1: ; call
+    push mem+234; os_targ
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_eq
+.blockend_2: ; call
+    pop rbx
+    test rbx, rbx
+.blockstart_3: ; if
+    jz .blockend_3
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_3: ; if
+    add rsp, 8
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_0
+.blockend_0: ; do
+    add rsp, 8
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_open:
+    push qword 257
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    pop r10
+    syscall
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_write:
+    push qword 1
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push str_36
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_println
+.blockend_1: ; call
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_0: ; if
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_readf:
+    push qword 0
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push str_37
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_println
+.blockend_1: ; call
+    add rsp, 8
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_0: ; if
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_close:
+    push qword 3
+    pop rax
+    pop rdi
+    syscall
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push str_38
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_println
+.blockend_1: ; call
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_0: ; if
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_os_cwd:
+    push mem+298; os_cwdbuff
+    push qword 255
+    push qword 79
+    pop rax
+    pop rdi
+    pop rsi
+    syscall
+    push rax
+    add rsp, 8
+    push mem+298; os_cwdbuff
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_filestream:
+proc_filestream_free:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heap_free
+.blockend_0: ; call
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_filestream_new:
+    push mem+554; filestream_tmp
+    push qword 2048
+    push qword 2
+    pop rax
+    pop rbx
+    imul rax, rbx
+    push rax
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 8
+    push qword 2
+    pop rax
+    pop rbx
+    imul rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heap_zalloc
+.blockend_0: ; call
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push qword 0
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 47'
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    add rsp, 8
+    push qword -100
+.blockend_1: ; if
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_os_open
+.blockend_2: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_3: ; if
+    jz .blockend_3
+    add rsp, 8
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_heap_free
+.blockend_4: ; call
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_3: ; if
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push qword 2048
+    push qword 2
+    pop rax
+    pop rbx
+    imul rax, rbx
+    push rax
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_os_readf
+.blockend_5: ; call
+    add rsp, 8
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_filestream_readchar:
+    push mem+554; filestream_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 2048
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 2048
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_mem_cpy
+.blockend_1: ; call
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 2048
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_mem_zero
+.blockend_2: ; call
+    push qword 2048
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_os_readf
+.blockend_3: ; call
+    add rsp, 8
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 2048
+    pop rbx
+    pop rax
+    sub rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+.blockend_0: ; if
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push mem+554; filestream_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_dirent:
+proc_dirent_getreclen:
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 65535
+    pop rax
+    pop rbx
+    and rax, rbx
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+; class_path:
+proc_path_new:
+    push mem+554; path_tmp
+    push qword 8
+    push qword 2
+    pop rax
+    pop rbx
+    imul rax, rbx
+    push rax
+    push qword 258
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_heap_alloc
+.blockend_0: ; call
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push qword 0
+    push qword 65536
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword -100
+    push qword 257
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    pop r10
+    syscall
+    push rax
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_path_iter:
+    push mem+554; path_tmp
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push qword 32
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 78
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    push qword 1
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_0: ; if
+    jz .blockend_0
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_heap_free
+.blockend_1: ; call
+    push qword 0
+    push qword 0
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_0: ; if
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push mem+554; path_tmp
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_runcmdstdout:
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_os_fork
+.blockend_0: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rax
+    pop rbx
+    cmp rax, rbx
+    cmove rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_1: ; if
+    jz .blockend_1
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+    mov rax, [args_ptr]
+    mov rax, [rax]
+    add rax, 2
+    shl rax, 3
+    mov rbx, [args_ptr]
+    add rbx, rax
+    push rbx
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 59
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    syscall
+    push rax
+    add rsp, 8
+    add rsp, 8
+    add rsp, 8
+    push qword -1
+    mov rax, 60
+    pop rdi
+    syscall
+.blockend_1: ; if
+    pop rax
+    push rax
+    push rax
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovg rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_2: ; if
+    jz .blockend_2
+    push qword 0
+    push qword 0
+    push mem+226; os_waitsig
+    push qword -1
+    push qword 61
+    pop rax
+    pop rdi
+    pop rsi
+    pop rdx
+    pop r10
+    syscall
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_os_chkdeverr
+.blockend_3: ; call
+    add rsp, 8
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_2: ; if
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_4: ; if
+    jz .blockend_4
+    push str_39
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_cstr_println
+.blockend_5: ; call
+.blockend_4: ; if
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_runtest:
+    push mem+554; tmpbuffer
+    push str_40
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push str_41
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push str_42
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push str_43
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+554; tmpbuffer
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_os_execcmd
+.blockend_0: ; call
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_cr
+.blockend_1: ; call
+    push str_44
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_print
+.blockend_2: ; call
+    pop rax
+    push rax
+    push rax
+.blockstart_3: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_3
+    jmp proc_cstr_println
+.blockend_3: ; call
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_cstr_cr
+.blockend_4: ; call
+    push mem+554; tmpbuffer
+    push mem+746; slamexec
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push str_45
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push str_46
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rax
+    pop rbx
+    push rax
+    push rbx
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+554; tmpbuffer
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_os_execcmd
+.blockend_5: ; call
+    push mem+226; os_waitsig
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_6: ; if
+    jz .blockend_6
+    push str_47
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_cstr_print
+.blockend_7: ; call
+    push mem+226; os_waitsig
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_8: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_8
+    jmp proc_int_print
+.blockend_8: ; call
+    push str_48
+.blockstart_9: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_9
+    jmp proc_cstr_println
+.blockend_9: ; call
+    push mem+554; tmpbuffer
+.blockstart_10: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_10
+    jmp proc_runcmdstdout
+.blockend_10: ; call
+    push str_49
+.blockstart_11: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_11
+    jmp proc_cstr_println
+.blockend_11: ; call
+    push mem+810; failed
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_6: ; if
+    push mem+554; tmpbuffer
+    push str_50
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    push qword 8
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push qword 0
+    pop rbx
+    pop rax
+    mov qword [rax], rbx
+    push rax
+    add rsp, 8
+    push mem+554; tmpbuffer
+.blockstart_12: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_12
+    jmp proc_runcmdstdout
+.blockend_12: ; call
+    push mem+226; os_waitsig
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+    push qword 0
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovne rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+.blockstart_13: ; if
+    jz .blockend_13
+    push str_51
+.blockstart_14: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_14
+    jmp proc_cstr_print
+.blockend_14: ; call
+    push mem+226; os_waitsig
+    pop rax
+    xor rbx, rbx
+    mov rbx, [rax]
+    push rbx
+.blockstart_15: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_15
+    jmp proc_int_cstr
+.blockend_15: ; call
+.blockstart_16: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_16
+    jmp proc_cstr_println
+.blockend_16: ; call
+    push mem+810; failed
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+.blockend_13: ; if
+    push mem+811; passed
+    pop rax
+    push rax
+    push rax
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    pop rbx
+    pop rax
+    mov byte [rax], bl
+    push rax
+    add rsp, 8
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+proc_main:
+    push mem+746; slamexec
+    push str_52
+.blockstart_0: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_0
+    jmp proc_os_env
+.blockend_0: ; call
+.blockstart_1: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_1
+    jmp proc_cstr_cpy
+.blockend_1: ; call
+    add rsp, 8
+    push str_53
+.blockstart_2: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_2
+    jmp proc_cstr_cat
+.blockend_2: ; call
+    add rsp, 8
+    push qword 0
+.blockstart_3: ; do
+    push qword 1
+    pop rax
+    pop rbx
+    add rax, rbx
+    push rax
+    push mem+682; tmpname
+.blockstart_4: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_4
+    jmp proc_cstr_clear
+.blockend_4: ; call
+    push str_54
+.blockstart_5: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_5
+    jmp proc_cstr_cpy
+.blockend_5: ; call
+    add rsp, 8
+    pop rax
+    pop rbx
+    push rbx
+    push rax
+    push rbx
+.blockstart_6: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_6
+    jmp proc_int_cstr
+.blockend_6: ; call
+.blockstart_7: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_7
+    jmp proc_cstr_cat
+.blockend_7: ; call
+    push str_55
+.blockstart_8: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_8
+    jmp proc_cstr_cat
+.blockend_8: ; call
+.blockstart_9: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_9
+    jmp proc_runtest
+.blockend_9: ; call
+    pop rax
+    push rax
+    push rax
+    push qword 4
+    mov rcx, 0
+    mov rdx, 1
+    pop rbx
+    pop rax
+    cmp rax, rbx
+    cmovl rcx, rdx
+    push rcx
+    pop rbx
+    test rbx, rbx
+    jnz .blockstart_3
+.blockend_3: ; do
+    add rsp, 8
+.blockstart_10: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_10
+    jmp proc_cstr_cr
+.blockend_10: ; call
+    push str_56
+.blockstart_11: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_11
+    jmp proc_cstr_println
+.blockend_11: ; call
+.blockstart_12: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_12
+    jmp proc_cstr_cr
+.blockend_12: ; call
+    push str_57
+.blockstart_13: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_13
+    jmp proc_cstr_print
+.blockend_13: ; call
+    push mem+811; passed
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+.blockstart_14: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_14
+    jmp proc_int_print
+.blockend_14: ; call
+    push str_58
+.blockstart_15: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_15
+    jmp proc_cstr_print
+.blockend_15: ; call
+    push mem+810; failed
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+.blockstart_16: ; call
+    mov rax, [ret_stack_rsp]
+    add rax, 16
+    mov rbx, [loc_stack_rsp]
+    mov qword [rax - 8], rbx
+    mov qword [ret_stack_rsp], rax
+    mov qword [rax], .blockend_16
+    jmp proc_int_print
+.blockend_16: ; call
+    push mem+810; failed
+    pop rax
+    xor rbx, rbx
+    mov bl, [rax]
+    push rbx
+    mov rax, 60
+    pop rdi
+    syscall
+    mov rax, [ret_stack_rsp]
+    mov rax, [rax - 8]
+    mov [loc_stack_rsp], rax
+    mov rax, [ret_stack_rsp]
+    sub rax, 16
+    mov qword [ret_stack_rsp], rax
+    add rax, 16
+    jmp qword [rax]
+    jmp quit
+_start:
+    mov qword [args_ptr], rsp
+    mov qword [ret_stack_rsp], ret_stack
+    mov qword [loc_stack_rsp], loc_stack
+    mov rax, [ret_stack_rsp] 
+    mov qword [rax], quit
+    jmp proc_main
+quit:
+    mov rax, 60
+    mov rdi, 0
+    syscall
+section '.data'
+str_0: db 10, 0 ;\n
+str_1: db 99, 111, 117, 108, 100, 32, 110, 111, 116, 32, 97, 108, 108, 111, 99, 97, 116, 101, 32, 104, 101, 97, 112, 0 ;could not allocate heap
+str_2: db 72, 69, 65, 80, 32, 77, 65, 80, 0 ;HEAP MAP
+str_3: db 45, 45, 45, 45, 45, 45, 45, 45, 0 ;--------
+str_4: db 115, 105, 122, 101, 58, 32, 32, 32, 0 ;size:   
+str_5: db 79, 98, 106, 101, 99, 116, 0 ;Object
+str_6: db 32, 32, 97, 100, 100, 114, 58, 32, 0 ;  addr: 
+str_7: db 32, 32, 115, 105, 122, 101, 58, 32, 0 ;  size: 
+str_8: db 117, 115, 101, 100, 58, 32, 0 ;used: 
+str_9: db 66, 97, 100, 32, 102, 114, 101, 101, 32, 99, 97, 108, 108, 0 ;Bad free call
+str_10: db 66, 97, 100, 32, 114, 101, 97, 108, 108, 111, 99, 32, 99, 97, 108, 108, 0 ;Bad realloc call
+str_11: db 27, 91, 49, 59, 51, 49, 109, 0 ;\e[1;31m
+str_12: db 91, 0 ;[
+str_13: db 93, 32, 0 ;]\ 
+str_14: db 27, 91, 48, 59, 48, 109, 0 ;\e[0;0m
+str_15: db 27, 91, 48, 59, 51, 50, 109, 0 ;\e[0;32m
+str_16: db 91, 0 ;[
+str_17: db 93, 32, 0 ;]\ 
+str_18: db 27, 91, 48, 59, 48, 109, 0 ;\e[0;0m
+str_19: db 27, 91, 48, 59, 51, 51, 109, 0 ;\e[0;33m
+str_20: db 91, 0 ;[
+str_21: db 93, 32, 0 ;]\ 
+str_22: db 27, 91, 48, 59, 48, 109, 0 ;\e[0;0m
+str_23: db 91, 0 ;[
+str_24: db 93, 32, 0 ;]\ 
+str_25: db 69, 82, 82, 79, 82, 58, 32, 99, 97, 110, 116, 32, 111, 112, 101, 110, 32, 47, 100, 101, 118, 47, 110, 117, 108, 108, 0 ;ERROR: cant open /dev/null
+str_26: db 47, 100, 101, 118, 47, 110, 117, 108, 108, 0 ;/dev/null
+str_27: db 69, 82, 82, 79, 82, 0 ;ERROR
+str_28: db 69, 82, 82, 79, 82, 0 ;ERROR
+str_29: db 67, 77, 68, 0 ;CMD
+str_30: db 82, 117, 110, 58, 32, 0 ;Run: 
+str_31: db 32, 0 ; 
+str_32: db 67, 77, 68, 0 ;CMD
+str_33: db 82, 117, 110, 58, 32, 0 ;Run: 
+str_34: db 32, 0 ; 
+str_35: db 66, 97, 100, 32, 97, 114, 103, 0 ;Bad arg
+str_36: db 69, 114, 114, 111, 114, 32, 119, 114, 105, 116, 105, 110, 103, 32, 102, 105, 108, 101, 0 ;Error writing file
+str_37: db 69, 114, 114, 111, 114, 32, 114, 101, 97, 100, 105, 110, 103, 32, 102, 105, 108, 101, 0 ;Error reading file
+str_38: db 69, 114, 114, 111, 114, 32, 99, 108, 111, 115, 105, 110, 103, 32, 102, 105, 108, 101, 0 ;Error closing file
+str_39: db 69, 82, 82, 79, 82, 0 ;ERROR
+str_40: db 47, 117, 115, 114, 47, 98, 105, 110, 47, 114, 109, 0 ;/usr/bin/rm
+str_41: db 45, 102, 0 ;-f
+str_42: db 116, 101, 115, 116, 101, 114, 0 ;tester
+str_43: db 116, 101, 115, 116, 101, 114, 46, 97, 115, 109, 0 ;tester.asm
+str_44: db 35, 32, 0 ;# 
+str_45: db 45, 111, 0 ;-o
+str_46: db 116, 101, 115, 116, 101, 114, 0 ;tester
+str_47: db 45, 32, 84, 101, 115, 116, 32, 70, 97, 105, 108, 101, 100, 32, 116, 111, 32, 99, 111, 109, 112, 105, 108, 101, 44, 32, 99, 111, 100, 101, 61, 0 ;- Test Failed to compile, code=
+str_48: db 96, 96, 96, 0 ;```
+str_49: db 96, 96, 96, 0 ;```
+str_50: db 116, 101, 115, 116, 101, 114, 0 ;tester
+str_51: db 45, 32, 84, 101, 115, 116, 32, 70, 97, 105, 108, 101, 100, 44, 32, 99, 111, 100, 101, 61, 0 ;- Test Failed, code=
+str_52: db 72, 79, 77, 69, 0 ;HOME
+str_53: db 47, 46, 108, 111, 99, 97, 108, 47, 115, 108, 97, 109, 47, 98, 105, 110, 47, 115, 108, 97, 109, 0 ;/.local/slam/bin/slam
+str_54: db 116, 101, 115, 116, 0 ;test
+str_55: db 46, 115, 108, 109, 0 ;.slm
+str_56: db 35, 32, 82, 101, 115, 117, 108, 116, 115, 0 ;# Results
+str_57: db 45, 32, 80, 97, 115, 115, 101, 100, 58, 32, 0 ;- Passed: 
+str_58: db 45, 32, 70, 97, 105, 108, 101, 100, 58, 32, 0 ;- Failed: 
+section '.bss'
+args_ptr: rq 1
+ret_stack_rsp: rq 1
+ret_stack: rq 1024
+loc_stack_rsp: rq 1
+loc_stack: rq 512
+mem: rb 812

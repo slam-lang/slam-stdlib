@@ -324,7 +324,6 @@ class map
   push proc in 2 2
     map.entry swap put disc
     map.curtemp swap put disc
-    
 
     map.entry read
     map.curtemp read

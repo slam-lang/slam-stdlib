@@ -1,0 +1,131 @@
+inc "std/mem.slh"
+inc "std/int.slh"
+
+class mem
+  oper proc cpy 3 0
+    var size 8
+
+    size swap put disc
+    covr
+    covr == if disc disc ret end
+    do
+      covr
+      covr readc
+      putc disc
+  
+      swap 1 +
+      swap 1 +
+  
+      size
+      copy read
+      1 -
+      put disc
+      size read 0 >
+    end
+    disc
+    disc
+  
+    ret
+  end
+
+  oper proc eq 3 1
+    var dest 8
+    
+    swap dest swap put disc
+
+    do
+      covr readc
+      dest read readc
+
+      != if
+        disc
+        disc
+
+        bool.false
+        ret
+      end
+
+      swap 1 +
+      swap 1 -
+
+      dest
+      copy read 1 +
+      put disc
+      
+
+      copy 0 >
+    end
+    disc
+    disc
+
+    bool.true
+
+    ret
+  end
+
+  oper proc zero 2 0
+    var size 8
+
+    size swap put disc
+    do
+      copy
+      0
+      putc disc
+  
+      1 +
+  
+      size
+      size read
+      1 - put disc
+      size read 0 >
+    end
+    disc
+  
+    ret
+  end
+
+  oper proc set 3 0
+    var size 8
+    var value 1
+
+    size swap put disc
+    value swap putc disc
+    do
+      copy
+      value readc
+      putc disc
+  
+      1 +
+  
+      size
+      size read
+      1 - put disc
+      size read 0 >
+    end
+    disc
+  
+    ret
+  end
+
+  oper proc mov 3 0
+    var size 8
+    var alloc 8
+
+    size swap put disc
+
+    swap size read heap.alloc
+    alloc swap put disc
+
+    alloc read swap
+    size read
+    mem.cpy
+
+    alloc read
+    size read
+    mem.cpy
+
+    alloc read heap.free
+
+    ret
+  end
+end

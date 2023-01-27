@@ -1,44 +1,6 @@
 inc "stdlib/log.slm"
 inc "stdlib.slm"
 
-class sysc
-  {TODO: finish}
-  enum
-  0   READ
-      WRITE
-      OPEN
-      CLOSE
-      STAT
-      FSTAT
-      LSTAT
-      POLL
-
-  12  BRK
-
-  16  IOCTL
-
-  33  DUP2
-
-  41  SOCKET
-      CONNECT
-      ACCEPT
-
-  49  BIND
-      LISTEN
-    
-  57  FORK
-      VFORK
-      EXECVE
-      EXIT
-      WAIT4
-      KILL
-
-  78  GETDENTS
-      GETCWD
-
-  257 OPENAT
-  end
-end
 
 class fm
   enum
@@ -299,7 +261,6 @@ class os
   opens a file
   }
   push proc open 4 1
-    sysc.OPENAT sys4
     
     ret
   end
@@ -365,98 +326,6 @@ class os
   end
 end
 
-class filestream
-  const BUFFER_SIZE 2048
-
-  prop eof bool.SIZE
-  prop fp int.SIZE
-  prop bufferidx int.SIZE
-  prop buffera filestream.BUFFER_SIZE
-  prop bufferb filestream.BUFFER_SIZE
-  prop _ 1
-
-  var tmp int.SIZE
-
-  push proc free 1 0
-    (heap.free)
-
-    ret
-  end
-
-  {
-  args: cstr[name]
-  }
-  push proc new 1 1
-    filestream.tmp
-    filestream.BUFFER_SIZE 2 * 1 +
-    int.SIZE 2 * +
-    (heap.zalloc)
-    put disc
-
-    0 swap
-    fm.READ swap
-    0
-    covr readc '/' != if
-      disc -100
-    end
-    (os.open)
-    copy 0 < if
-      disc
-      filestream.tmp read (heap.free)
-      NULL ret
-    end
-    filestream.tmp read filestream.fp . swap put disc
-
-    filestream.BUFFER_SIZE 2 *
-    filestream.tmp read filestream.buffera .
-    filestream.tmp read filestream.fp . read
-    (os.readf)
-    disc
-
-    filestream.tmp read
-
-    ret
-  end
-
-  push proc readchar 1 1
-    filestream.tmp swap put disc
-    
-    filestream.tmp read filestream.bufferidx . read
-    filestream.BUFFER_SIZE > if
-      filestream.tmp read filestream.buffera .
-      filestream.tmp read filestream.bufferb .
-      filestream.BUFFER_SIZE
-      (mem.cpy)
-      
-      filestream.tmp read filestream.bufferb .
-      filestream.BUFFER_SIZE
-      (mem.zero)
-
-      filestream.BUFFER_SIZE
-      filestream.tmp read filestream.bufferb .
-      filestream.tmp read filestream.fp . read
-      (os.readf)
-      disc
-      
-      filestream.tmp read
-      filestream.bufferidx . copy
-      read filestream.BUFFER_SIZE -
-      put disc
-    end
-
-    filestream.tmp read
-    copy filestream.buffera .
-    swap filestream.bufferidx . read +
-    readc
-
-    filestream.tmp read
-    filestream.bufferidx . copy
-    read 1 +
-    put disc
-
-    ret
-  end
-end
 
 class dirent
   prop ino int.SIZE

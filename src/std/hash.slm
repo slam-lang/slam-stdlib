@@ -1,0 +1,99 @@
+class hash
+  oper proc xor 2 1
+    asm "pop rbx"
+    asm "pop rax"
+    asm "xor rax, rbx"
+    asm "push rax"
+    asm "push 0"
+    disc
+
+    ret
+  end
+
+  oper proc addint 2 1
+    var result 8
+
+    +
+    result swap put disc
+    
+    result read 
+    result read
+    asm "pop rax"
+    asm "shl rax, 10"
+    asm "push rax"
+    +
+    result swap put disc
+
+    result read
+    result read
+    asm "pop rax"
+    asm "shr rax, 6"
+    asm "push rax"
+    hash.xor
+    result swap put disc
+
+    result read
+
+    ret
+  end
+
+  oper proc finish 1 1
+    var result 8
+  
+    copy
+    asm "pop rax"
+    asm "shl rax, 3"
+    asm "push rax"
+    +
+    result swap put disc
+
+    result read
+    result read
+    asm "pop rax"
+    asm "shr rax, 11"
+    asm "push rax"
+    hash.xor
+    result swap put disc
+
+    result read 
+    result read
+    asm "pop rax"
+    asm "shl rax, 15"
+    asm "push rax"
+    +
+    result swap put disc
+
+    result read
+
+    ret
+  end
+
+  oper proc new 2 1
+    var target 8
+    var mem 8
+    var result 8
+
+    target swap put disc
+    mem swap put disc
+    result 0 put disc
+
+    0
+    do
+      copy mem read + read
+      result read swap hash.addint
+      result swap put disc
+
+      8 +
+      copy int.print cstr.cr
+      copy target read
+      copy int.print cstr.cr
+      > !
+      "lol" cstr.println
+    end
+    disc
+
+    result read hash.finish
+
+    ret
+  end
+end

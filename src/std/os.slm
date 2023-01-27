@@ -1,0 +1,233 @@
+inc "std/os.slh"
+
+class os
+  oper proc fork 0 1
+    sysc.FORK sys0
+  
+    ret
+  end
+
+  oper proc execcmd 1 1
+    var waitsig 8
+
+    os.fork
+    copy 0 == if
+      {child}
+      1 {stdin}
+      0
+      fm.READ
+      {TODO: magic num}
+      "/dev/null"
+      -100
+      sysc.OPENAT sys4
+      
+      copy 0 < if
+        "ERROR: cant open /dev/null" cstr.println
+
+        -1 quit
+      end
+     
+      sysc.DUP2 sys2 
+      0 < if
+        "ERROR: cant open /dev/null" cstr.println
+
+        -1 quit
+      end
+  
+      covr envp swap copy read
+    
+      sysc.EXECVE sys3 disc
+      disc disc
+      -1
+      quit
+
+    end
+    copy 0 > if
+      {parent}
+
+      NULL
+      0
+      waitsig
+      -1
+      sysc.WAIT4 sys4
+      0 < if
+        "ERROR: cant open /dev/null" cstr.println
+
+        -1 quit
+      end
+      disc disc
+      waitsig read ret
+    end
+    disc disc
+
+    0 ret
+  end
+
+  oper proc execcmdloud 1 1
+    var waitsig 8
+
+    os.fork
+    copy 0 == if
+      {child}
+      covr envp swap copy read
+    
+      sysc.EXECVE sys3 disc
+      disc disc
+      -1
+      quit
+    end
+    copy 0 > if
+      {parent}
+  
+      NULL
+      0
+      waitsig
+      -1
+      sysc.WAIT4 sys4
+      0 < if
+        "ERROR: cant open /dev/null" cstr.println
+
+        -1 quit
+      end
+      disc disc
+      waitsig read ret
+    end
+    0 < if
+      "ERROR" cstr.println
+    end
+    disc
+    0 ret
+  end
+
+  oper proc execcmdecho 1 1
+    "[CMD] Run: " cstr.print
+    copy
+    do
+      copy read cstr.print
+      8 +
+       
+      copy if
+        " " cstr.print
+      end
+      copy read NULL !=
+    end
+    disc
+    cstr.cr
+
+    os.execcmd
+    
+    ret
+  end
+
+  oper proc execcmdecholoud 1 1
+    "[CMD] Run: " cstr.print
+    copy
+    do
+      copy read cstr.print
+      8 +
+       
+      copy if
+        " " cstr.print
+      end
+      copy read NULL !=
+    end
+    disc
+    cstr.cr
+
+    os.execcmdloud
+    
+    ret
+  end
+
+  oper proc args 1 1
+    copy argc - 0 < ! if
+      disc NULL ret
+    end
+    8 *
+    argv +
+  
+    read
+    ret
+
+    ret
+  end
+
+  oper proc env 1 1
+    var targ 8
+    var buff 64
+
+    targ swap put disc
+    
+    envp
+    do
+      copy read
+      '=' buff cstr.split
+      targ read cstr.eq if
+        swap disc
+        ret
+      end
+      disc
+
+      8 +
+      copy read NULL !=
+    end
+    disc 
+
+    NULL
+
+    ret
+  end
+
+  oper proc openf 4 1
+    sysc.OPENAT sys4
+
+    ret
+  end
+
+  oper proc writef 3 0
+    sysc.WRITE sys3
+  
+    0 < if
+      "Error writing file" cstr.println
+      -1 quit
+    end
+    ret
+  end
+
+  oper proc readf 3 1
+    sysc.READ sys3
+    
+    copy 0 < if
+      "Error reading file" cstr.println
+      disc -1 quit
+    end
+    ret
+  end
+
+  oper proc closef 1 0
+    sysc.CLOSE sys1
+  
+    0 < if
+      "Error closing file" cstr.println
+      -1 quit
+    end
+    ret
+  end
+
+  oper proc existsf 1 1
+    var statbuff statresult.SIZE
+
+    statbuff
+    swap
+    sysc.STAT sys2
+    0 < !
+
+    ret
+  end
+
+  oper proc cwd 0 1
+    "PWD" os.env
+
+    ret
+  end
+end

@@ -1,0 +1,20 @@
+inc "std/heap.slh"
+inc "std/ptr.slh"
+inc "std/int.slh"
+
+class dlist
+  prop max 8
+  prop size 8
+  prop elemsize 8
+  prop data 0
+  
+  const STEP 16
+
+  head oper proc new 1 1
+  head oper proc free 1 0
+  head oper proc len 1 1
+  head oper proc getptr 2 1
+  head oper proc pop 1 1
+  head oper proc append 2 1
+  head oper proc last 1 2
+end

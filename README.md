@@ -10,3 +10,5 @@ this is the standard library for slam, also the first package
 - Detect Segfaults before they happen, and return NULL.
 - Classes can use upto 32b of vars before you have to use the heap.
 - stdlib.slm imports the other libraries. 
+- No Printing out of print procs
+- NO [ ] BLOCKS

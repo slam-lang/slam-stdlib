@@ -1,0 +1,20 @@
+inc "std/mem.slm"
+inc "std/cstr.slm"
+inc "std/heap.slm"
+
+class str
+  prop max 8
+  prop size 8
+  prop data 0
+
+  const STEP 64
+
+  head oper proc new 0 1
+  head oper proc print 1 0
+  head oper proc len 1 1
+  head oper proc cat 2 1
+  head oper proc catc 2 1
+  head oper proc sput 3 1
+  head oper proc free 1 0
+  head oper proc ceq 2 1
+end

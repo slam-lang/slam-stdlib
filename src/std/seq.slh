@@ -1,0 +1,24 @@
+inc "std/int.slm"
+inc "std/mem.slm"
+
+class seq
+  prop size 8
+  prop max 8
+  prop elem 8
+  prop data 0
+
+  var tmp 8
+  var etmp 8
+
+  head oper proc new 2 1
+  head oper proc setlen 2 1
+  head oper proc len 1 1
+  head oper proc pushint 2 1
+  head oper proc pushptr 2 1
+  head oper proc extend 2 1
+  head oper proc getaddr 2 2
+  head oper proc print 1 0
+  head oper proc popaddr 1 2
+  head oper proc free 1 0
+  {TODO: head oper proc in 2 2}
+end

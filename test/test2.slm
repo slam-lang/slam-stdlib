@@ -1,0 +1,20 @@
+inc "std/cstr.slm"
+inc "std/int.slm"
+inc "std/mem.slm"
+inc "std/heap.slm"
+inc "std/os.slm"
+
+proc main 0 0
+  "# os tests" cstr.println
+  cstr.cr
+
+  "- os.args " cstr.print
+
+  0 os.args cstr.println  
+
+  "- os.env " cstr.print
+
+  "HOME" os.env cstr.println
+
+  ret
+end

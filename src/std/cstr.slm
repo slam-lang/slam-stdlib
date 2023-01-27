@@ -1,0 +1,297 @@
+inc "std/cstr.slh"
+
+class cstr
+  oper proc len 1 1
+    copy readc 0 == if
+      disc 0 ret
+    end
+    copy
+    do
+      1 +
+  
+      copy readc
+    end
+    covr -
+    swap disc
+
+    ret
+  end
+
+  oper proc print 1 0
+    copy cstr.len swap 1 1 sys3 disc
+
+    ret
+  end
+  
+  oper proc cr 0 0
+    `\n` 1 1 sys3 disc
+
+    ret
+  end
+
+  oper proc println 1 0
+    cstr.print
+    cstr.cr
+
+    ret
+  end
+  
+  oper proc eq 2 1
+    1 -
+    swap 1 -
+    do
+      1 +
+      swap 1 +
+      covr readc
+      covr readc
+      covr 0 ==
+      covr 0 == &&
+      if
+        disc disc
+        disc disc
+        bool.true
+        ret
+      end
+      covr 0 ==
+      covr 0 == ||
+      if
+        disc disc
+        disc disc
+        bool.false
+        ret
+      end
+      ==
+    end
+    disc
+    disc
+    bool.false
+
+    ret
+  end
+
+  oper proc cpy 2 2
+    covr
+    covr
+    do
+      covr
+      covr readc
+  
+      putc
+      disc
+  
+      swap 1 +
+      swap 1 +
+      copy readc 0 !=
+    end
+    swap 1 +
+    0
+    putc
+    disc
+    disc
+
+    ret
+  end
+
+  oper proc last 1 1
+    1 -
+    do
+      1 +
+      copy readc
+      0 !=
+    end
+    1 -
+    readc
+
+    ret
+  end
+
+  oper proc clear 1 1
+    copy readc 0 == if ret end
+    copy
+    do
+      copy
+      0
+      putc
+      disc
+  
+      1 +
+      copy readc
+    end
+    disc
+  
+    ret
+  end
+
+  oper proc cat 2 1
+    covr copy cstr.len +
+    swap cstr.cpy disc disc
+
+    ret
+  end
+  
+  oper proc isnum 1 1
+    var min 1
+    var max 1
+
+    min '0' putc disc
+    max '9' putc disc
+  
+    copy copy cstr.len + 1 -
+    readc 
+    copy 'b' == if
+      max '1' putc disc
+    end
+    copy 'h' == if
+      max 'f' putc disc
+    end
+
+    disc
+    copy readc
+    '-' == if 1 + end
+    do
+      copy readc
+      copy min readc <
+      covr max readc >
+      || if
+        disc
+        copy readc 'b' == 
+        covr readc 'h' == ||
+        covr cstr.len 1 == &&
+        swap disc
+        ret
+      end
+      disc
+  
+      1 +
+      copy readc
+      0 !=
+    end
+    disc
+    bool.true
+
+    ret
+  end
+
+  oper proc int 1 1
+    var mul 8
+    mul 10 putc disc
+
+    copy cstr.isnum ! if
+      disc 0 ret
+    end
+    
+    copy copy cstr.len + 1 -
+    copy readc 'b' == if
+      mul 2 putc disc
+    end
+    copy readc 'h' == if
+      mul 16 putc disc
+    end
+    disc
+    
+    0
+    do
+      mul readc *
+      covr readc
+      copy 'F' 1 + <
+      covr 'A' 1 - > && if
+        'A' 10 - -
+        '0' +
+      end
+      '0' - +
+      
+      swap 1 +
+      swap
+  
+      covr readc
+      copy 0 !=
+      covr 'b' != &&
+      covr 'h' != &&
+      swap disc
+    end
+    swap disc
+  
+    ret
+  end
+
+  oper proc split 3 2
+    var delim 8
+    var store 8
+
+    store swap put disc
+    delim swap putc disc
+
+    store read cstr.clear
+
+    do
+      covr readc
+      delim readc ==
+      if
+        disc 1 +
+        store read
+        ret
+      end
+      covr readc
+      covr swap
+      putc disc
+
+      swap 1 +
+      swap 1 +
+
+      covr read 0 !=
+    end
+
+    ret
+  end
+
+  push proc iter 1 2
+    var tmp 8
+
+    tmp swap put disc
+
+    tmp read readc 0 == if
+      NULL
+      NULL
+      ret
+    end
+
+    tmp read 1 +
+    tmp read 
+
+    ret
+  end
+
+  {
+  oper proc printf 2 0
+    var args 8
+    var string 8
+
+    args swap put disc
+    string swap put disc
+
+    string readc 0 == if ret end
+
+    string
+    do
+      copy readc
+      copy '%' == if
+        disc
+        1 +
+        copy readc
+        copy 'd' == if
+            args read
+        end
+        copy 0 != if
+
+
+      end
+
+      1 +
+      copy readc
+    end
+    disc
+
+    ret
+  end
+  }
+end

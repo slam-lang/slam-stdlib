@@ -1,0 +1,219 @@
+inc "std/llist.slh"
+
+class llentry
+  oper proc new 1 1
+    8 +
+    heap.zalloc
+
+    ret
+  end
+
+  oper proc free 1 0
+    copy llentry.next . read
+    copy NULL != if
+      copy llentry.free
+    end
+    disc
+
+    heap.free
+
+    ret
+  end
+
+  oper proc last 1 1
+    copy llentry.next . read
+    NULL == if
+      ret
+    end
+    
+    llentry.next . read
+    llentry.last
+
+    ret
+  end
+  
+  oper proc pop 1 1
+    copy llentry.next . read
+    NULL == if
+      ret
+    end
+    
+    copy llentry.next . read
+    llentry.pop
+
+    copy llentry.next . read
+    llentry.next . read
+    NULL == if
+      copy llentry.next . NULL put disc
+    end
+
+    disc
+
+    ret
+  end
+
+  oper proc getptr 2 1
+    copy 0 == if
+      disc
+      llentry.next . read
+      llentry.data .
+      ret
+    end
+
+    1 -
+    covr llentry.next . read
+    swap
+    llentry.getptr
+    swap disc
+
+    ret
+  end
+
+  oper proc append 2 1
+    covr llentry.next . swap put disc
+      
+    ret
+  end
+end
+
+class llist
+  oper proc new 1 1
+    16 heap.zalloc
+
+    covr
+    covr llist.entry . swap put disc
+    swap disc
+
+    ret
+  end
+
+  oper proc free 1 0
+    copy llist.root . read
+    copy NULL != if
+      copy llentry.free
+    end
+    disc
+
+    heap.free
+
+    ret
+  end
+
+  oper proc last 1 2
+    copy llist.root . read NULL == if NULL ret end
+    copy llist.root . read llentry.last
+    
+    ret
+  end
+
+  oper proc pop 1 2
+    copy llist.root . read NULL == if NULL ret end
+    copy llist.root . read llentry.pop
+    
+    ret
+  end
+
+  oper proc len 1 1
+    copy llist.root . read NULL == if disc 0 ret end
+    llist.root . read
+    NULL swap
+    do
+      swap 1 +
+      swap
+
+      llentry.next . read
+      copy NULL !=
+    end
+    disc
+
+    ret
+  end
+
+  unsafe oper proc foreach 2 0
+    var call 8
+    
+    call swap put disc
+
+    llist.root . read
+    copy NULL == if disc ret end
+
+    do
+      copy llentry.data . call read () disc 
+
+      llentry.next . read
+      copy NULL !=
+    end
+    disc
+    
+    ret
+  end
+
+  oper proc getptr 2 1
+    var working 8
+
+    swap working swap put disc
+
+    copy 0 == if
+      disc
+      working read llist.root . read
+      llentry.data .
+      ret
+    end
+
+    1 -
+    working read llist.root . read
+    swap
+    llentry.getptr
+
+    ret
+  end
+
+  oper proc append 2 1
+    var working 8
+    
+    swap working swap put disc
+
+    working read
+    llist.last swap disc
+
+    NULL == if
+      working read
+      llist.entry . read
+      llentry.new
+
+      working read
+      llist.root . swap put read
+      llentry.data .
+      swap
+      
+      working read
+      llist.entry . read
+      mem.cpy
+
+      working read
+      ret
+    end
+    
+    working read
+    llist.entry . read
+    llentry.new
+    
+    working read
+    llist.last swap disc
+    swap llentry.append
+    disc
+
+    working read
+    llist.last swap disc
+    llentry.data .
+    swap
+
+    working read
+    llist.entry . read
+    mem.cpy
+    
+    working read
+
+    ret
+  end
+end

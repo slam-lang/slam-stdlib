@@ -1,0 +1,40 @@
+class loop
+  unsafe oper proc foreach 3 0
+    var block 8
+    var iterator 8
+
+    block swap put disc
+    iterator swap put disc
+    copy NULL != if
+      do
+        iterator read ()
+        copy NULL != if
+          copy block read ()
+        end
+
+        NULL !=
+      end
+    end
+    disc
+
+    ret
+  end
+
+  unsafe oper proc while 2 0
+    var block 8
+    var iterator 8
+
+    block swap put disc
+    iterator swap put disc
+    iterator read ()
+    ! if 
+      do
+        block read ()
+
+        iterator read ()
+      end
+    end
+
+    ret
+  end
+end

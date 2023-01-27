@@ -1,0 +1,21 @@
+inc "std/ptr.slh"
+inc "std/bool.slh"
+
+class cstr
+  prop data 0
+
+  head oper proc len 1 1
+  head oper proc print 1 0
+  head oper proc cr 0 0
+  head oper proc println 1 0
+  head oper proc eq 2 1
+  head oper proc cpy 2 2
+  head oper proc last 1 1
+  head oper proc clear 1 1
+  head oper proc cat 2 1
+  head oper proc isnum 1 1
+  head oper proc int 1 1
+  head oper proc split 3 2
+
+  head push proc iter 1 2
+end

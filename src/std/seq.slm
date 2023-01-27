@@ -1,0 +1,253 @@
+inc "std/seq.slh"
+
+class seq
+  oper proc new 2 1
+    copy heap.zalloc seq.tmp swap put disc
+    seq.elemtemp swap put disc
+
+    seq.tmp read
+    seq.elem .
+    swap put disc
+    
+    seq.tmp read
+    seq.max .
+
+    seq.elemtemp read
+    seq.data -
+
+    put disc
+    
+    seq.tmp read
+    seq.size .
+    0
+    put disc
+  
+    seq.tmp read
+    ret
+  end
+
+  oper proc setlen 2 1
+    swap seq.tmp swap put disc
+
+    seq.tmp read
+    seq.size .
+    swap put disc
+
+    seq.tmp read
+
+    ret
+  end
+
+  oper proc len 1 1
+    seq.size . read
+  
+    ret
+  end
+
+  oper proc pushint 2 1
+    seq.etmp swap put disc
+    seq.tmp swap put disc
+    
+    seq.tmp read
+    seq.elem . read
+    
+    seq.tmp read
+    seq.size . read
+  
+    1 + *
+    
+    seq.tmp read
+    seq.max . read
+    > if
+      NULL
+      ret
+    end
+    
+    seq.tmp read
+    seq.elem . read
+    
+    seq.tmp read
+    seq.size . read
+    *
+    
+    seq.tmp read
+    seq.data .
+    +
+    
+    seq.etmp read
+    put disc
+    
+    seq.tmp read
+    seq.size .
+
+    copy read
+    1 +
+    put
+  
+    ret
+  end
+
+  oper proc pushptr 2 1
+    seq.etmp swap put disc
+    seq.tmp swap put disc
+    
+    seq.tmp read
+    seq.elem . read
+    
+    seq.tmp read
+    seq.size . read
+  
+    1 + *
+    
+    seq.tmp read
+    seq.max . read
+    > if 
+      NULL
+      ret
+    end
+    
+    seq.tmp read
+    seq.elem . read
+    
+    seq.tmp read
+    seq.size . read
+    *
+    
+    seq.tmp read
+    seq.data .
+    +
+    
+    seq.etmp read
+    
+    seq.tmp read
+    seq.elem . read
+    mem.cpy
+    
+    seq.tmp read
+    seq.size .
+
+    copy read
+    1 +
+    put
+  
+    ret
+  end
+
+  oper proc extend 2 1
+    swap seq.tmp swap put disc
+
+    seq.tmp read
+    seq.size . read +
+    
+    seq.tmp read
+    seq.size . swap
+
+    put disc
+  
+    seq.tmp read
+
+    ret
+  end
+
+  oper proc getaddr 2 2 
+    swap seq.tmp swap put disc
+  
+    copy
+    seq.tmp read
+    seq.size . read
+    > if 
+      NULL ret
+    end
+    
+    seq.tmp read
+    seq.elem . read
+    *
+
+    seq.tmp read
+    seq.data .
+    +
+
+    seq.tmp read
+    swap
+
+    ret
+  end
+  
+  oper proc print 1 0
+    seq.tmp swap put disc
+    "[" cstr.print
+    seq.tmp read
+    seq.data . cstr.print
+    
+    seq.tmp read
+    seq.size . read
+
+    1 == if
+      "]" cstr.println
+      ret
+    end
+
+    0
+    do
+      ", " cstr.print
+
+      1 +
+      copy
+      seq.tmp read
+      seq.elem . read
+      *
+    
+      seq.tmp read
+      seq.data .
+      + cstr.print
+ 
+      copy
+      seq.tmp read
+      seq.size . read
+      1 - <
+    end
+    disc
+
+    "]" cstr.println
+    
+    ret
+  end
+
+  oper proc popaddr 1 2
+    seq.tmp swap put disc
+    
+    seq.tmp read
+    seq.size . read
+
+    1 -
+
+    seq.tmp read
+    seq.elem . read
+    *
+    
+    seq.tmp read
+    seq.data . +
+
+    seq.etmp
+    
+    swap put disc
+
+    seq.tmp read
+    seq.size .
+
+    copy read
+    1 -
+    put disc
+
+    seq.tmp read
+    seq.etmp read
+
+    ret
+  end
+
+  oper proc free 1 0
+    heap.free
+  
+    ret
+  end
+end

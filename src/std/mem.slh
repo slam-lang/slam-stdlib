@@ -1,0 +1,11 @@
+inc "std/heap.slh"
+inc "std/int.slh"
+
+class mem
+  head oper proc cpy 3 0
+  head oper proc eq 3 1
+  head oper proc zero 2 0
+  head oper proc set 3 0
+  head oper proc mov 3 0
+end
+

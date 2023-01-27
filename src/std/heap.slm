@@ -1,0 +1,182 @@
+inc "std/heap.slh"
+
+class heapentry
+  oper proc isentry 1 1
+    copy
+    copy heapentry.addr @ ==
+    covr heapentry.flags . readc
+    1 && 0 != &&
+    swap disc
+
+    ret
+  end
+
+  oper proc setfree 1 0
+    copy heap.allocstart swap put disc
+
+    copy heapentry.addr . 0 put disc
+    heapentry.flags .
+    copy readc 1 ~ &&
+    putc disc
+
+    ret
+  end
+
+  oper proc create 1 0
+    copy heap.allocstart swap put disc
+
+    copy heapentry.addr .
+    covr put disc
+    heapentry.flags .
+    copy readc 1 ||
+    putc disc
+
+    ret
+  end
+end
+
+class heap
+  oper proc newpage 0 0
+    heap.endaddr read
+    heap.PAGE_SIZE +
+    copy
+    heap.endaddr swap put disc
+
+    heap.BRK sys1 copy heap.endaddr swap put disc
+    0 < if
+      "Error allocating heap page" cstr.println
+      1 quit
+    end
+
+    ret
+  end
+
+  oper proc init 0 0
+    heap.isinit readc if
+      ret
+    end
+    heap.isinit 1 putc disc
+
+    { get the heap addr }
+    heap.startaddr
+    0 heap.BRK sys1
+    put disc
+
+    { store the heap addr}
+
+    heap.endaddr
+    heap.startaddr read
+    put disc
+
+    heap.allocstart
+    heap.startaddr read
+    put disc
+
+
+    heap.newpage
+
+    ret
+  end
+
+  oper proc alloc 1 1
+    var reqsize 8
+
+    heap.init
+
+    17 +
+    copy heap.STEP_SIZE /% swap disc -
+    heap.STEP_SIZE +
+    reqsize swap put disc
+
+    0
+    heap.allocstart read
+    swap heap.STEP_SIZE -
+    swap heap.STEP_SIZE -
+    do
+      swap heap.STEP_SIZE +
+      swap heap.STEP_SIZE +
+      copy heap.endaddr read < ! if
+        heap.newpage
+      end
+      copy heapentry.isentry if
+        copy heapentry.size @ +
+        swap disc 0 heap.STEP_SIZE -
+        swap heap.STEP_SIZE -
+      end
+      covr reqsize read <
+    end
+    swap disc
+
+    reqsize read -
+
+    copy heapentry.size .
+    reqsize read
+    put disc
+    copy heapentry.create
+
+    17 +
+
+    ret
+  end
+
+  oper proc zalloc 1 1
+    heap.init
+
+    heap.alloc
+    copy
+
+    copy 17 -
+    heapentry.size .
+    read
+    mem.zero
+
+    ret
+  end
+
+  oper proc free 1 0
+    17 -
+
+    copy heapentry.isentry ! if
+      disc ret
+    end
+
+    heapentry.setfree
+
+    ret
+  end
+
+  oper proc realloc 2 1
+    var reqsize 8
+    var result 8
+    var start 8
+    var orig 8
+
+    reqsize swap put disc
+    orig swap put disc
+
+    orig read
+    17 - heapentry.isentry ! if
+      "bad realloc" cstr.println
+    end
+
+    start
+    orig read 17 -
+    heapentry.size @
+    put disc
+
+    orig read heap.free
+
+    result
+    reqsize read heap.alloc
+    put disc
+
+    result read
+    orig read
+    start read
+    mem.cpy
+
+    result read
+
+    ret
+  end
+end

@@ -1,0 +1,98 @@
+inc "std/int.slh"
+
+class int
+  oper proc gettmp 0 1
+    int.tmpresult 30 +
+    int.tmpidx read -
+
+    ret
+  end
+
+  oper proc inctmpidx 0 0
+    int.tmpidx
+    int.tmpidx read 1 +
+    putc disc
+
+    ret
+  end
+
+  oper proc cstr 1 1
+    do
+      10 /%
+      '0' +
+      int.gettmp
+      swap
+      putc disc
+      int.inctmpidx
+      
+      copy 0 !=
+    end
+    disc
+    int.gettmp 1 +
+    
+    int.tmpidx 0 putc disc
+    ret
+  end
+
+  oper proc cstrhex 1 1
+    do
+      16 /%
+      copy 9 > if 'a' 10 - + end
+      copy 10 < if '0' + end
+      int.gettmp
+      swap
+      putc disc
+      int.inctmpidx
+
+      copy 0 !=
+    end
+    disc
+    
+    int.gettmp
+    '$'
+    putc disc
+    int.inctmpidx
+
+    int.gettmp 1 +
+    
+    int.tmpidx 0 putc disc
+    ret
+  end
+
+  oper proc print 1 0
+    int.cstr cstr.print
+    
+    int.tmpidx 0 putc disc
+    ret
+  end
+
+  oper proc printhex 1 0
+    do
+      16 /%
+      copy 9 > if 'a' 10 - + end
+      copy 10 < if '0' + end
+      int.gettmp
+      swap
+      putc disc
+      int.inctmpidx
+
+      copy 0 !=
+    end
+    disc
+  
+    int.gettmp
+    'x'
+    putc disc
+    int.inctmpidx
+  
+    int.gettmp
+    '0'
+    putc disc
+    int.inctmpidx
+  
+    int.gettmp 1 + cstr.print
+    int.tmpidx 0 putc disc
+
+    ret
+  end
+end

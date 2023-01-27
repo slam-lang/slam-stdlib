@@ -1,0 +1,8 @@
+const NULL 0
+
+inc "std/dlist.slm"
+inc "std/heap.slm"
+inc "std/mem.slm"
+inc "std/seq.slm"
+inc "std/cstr.slm"
+inc "std/int.slm"

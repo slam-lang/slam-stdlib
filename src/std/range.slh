@@ -1,0 +1,12 @@
+inc "std/loop.slm"
+
+class range
+  prop start 8
+  prop stop 8
+  prop current 8
+
+  head oper proc new 2 1
+  head oper proc free 1 0
+  head oper proc for 3 0
+  head push proc iter 1 2
+end

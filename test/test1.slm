@@ -1,0 +1,50 @@
+inc "std/cstr.slm"
+
+proc main 0 0
+  "# cstr tests" cstr.println
+  cstr.cr
+
+  "- len" cstr.println
+
+  "" cstr.len 0 != if
+    "- cstr.len broken, 0 size" cstr.println
+
+    -1 quit
+  end
+
+  "123" cstr.len 3 != if
+    "- cstr.len broken, 3 size" cstr.println
+
+    -1 quit
+  end
+
+  "- eq" cstr.println
+
+  "eq" "eq" cstr.eq ! if
+    "- cstr.eq broken, eq not equal" cstr.println
+
+    -1 quit
+  end
+
+  "eqfdsafdsa" "eq" cstr.eq if
+    "- cstr.eq broken, eq not equal" cstr.println
+
+    -1 quit
+  end
+
+  "eq" "eqfdsafdsa" cstr.eq if
+    "- cstr.eq broken, eq not equal" cstr.println
+
+    -1 quit
+  end
+
+  "- isnum" cstr.println
+
+  "100" cstr.isnum ! if
+    "- cstr.isnum broken, 100 not a number" cstr.println
+
+    -1 quit
+  end
+
+  ret
+end

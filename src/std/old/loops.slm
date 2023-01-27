@@ -1,8 +1,8 @@
 class loop
   var iterator int.SIZE
   var block int.SIZE
-
-  oper proc foreach 3 0
+  
+  unsafe oper proc foreach 3 0
     loop.block swap put disc
     loop.iterator swap put disc
     copy NULL != if
@@ -20,7 +20,7 @@ class loop
     ret
   end
 
-  oper proc while 2 0
+  unsafe oper proc while 2 0
     loop.block swap put disc
     loop.iterator swap put disc
     loop.iterator read ()

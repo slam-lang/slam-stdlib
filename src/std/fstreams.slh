@@ -1,0 +1,11 @@
+inc "std/os.slh"
+
+class filestream
+  const BUFFER_SIZE 512
+
+  prop fp 8
+  prop bufferidx 8
+  prop buffera 512
+  prop bufferb 512
+  prop msc 1
+end

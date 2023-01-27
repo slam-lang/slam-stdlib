@@ -1,0 +1,66 @@
+inc "std/range.slh"
+
+class range
+  oper proc new 2 1
+    var result 8
+
+    result
+    8 3 *
+    heap.alloc
+    put disc
+
+    result read range.stop . swap put disc
+    result read range.start . swap put disc
+
+    result read range.current . 
+    result read range.start . read 1 -
+    put disc
+
+    result read
+
+    ret
+  end
+
+  oper proc free 1 0
+    heap.free
+
+    ret
+  end
+
+  oper proc for 3 0
+    var block 8
+
+    block swap put disc
+    range.new
+    range.iter
+    
+    block read
+    loop.foreach
+
+    ret
+  end
+
+  push proc iter 1 2
+    var tmp 8
+
+    tmp swap put disc
+
+    tmp read range.current .
+    tmp read range.current . read 1 +
+    put disc
+
+    tmp read range.stop . read
+    tmp read range.current . read
+    < if
+      tmp read range.free
+      NULL
+      NULL
+      ret
+    end
+
+    tmp read 
+    tmp read range.current .
+
+    ret
+  end
+end

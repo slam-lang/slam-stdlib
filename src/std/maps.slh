@@ -1,0 +1,48 @@
+inc "std/mem.slm"
+inc "std/heap.slm"
+inc "std/llist.slm"
+
+class hash
+  var result 1
+  {
+  args: ptr[data] int[size]
+  result: int[hash]
+  }
+  oper proc get 2 1
+    hash.result 7 putc disc
+    
+    do
+      1 -
+      covr
+      covr + readc
+      hash.result readc 31 * +
+      hash.result swap
+      putc disc
+
+      copy 1 !=
+    end
+    disc
+    disc
+    
+    hash.result readc
+
+    ret
+  end
+end
+
+class map
+  prop entrysize 8
+  prop keysize 8
+  prop count 8
+  prop dataarray 0
+
+  head oper proc new 3 1
+  head oper proc free 1 0
+
+  head oper proc valsize 1 1
+  head oper proc append 3 1
+  head oper proc foreach 2 0
+  head oper proc getptr 2 2
+  head oper proc in 2 2
+  head oper proc len 1 2
+end

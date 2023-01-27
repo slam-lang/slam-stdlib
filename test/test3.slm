@@ -1,0 +1,26 @@
+inc "std/cstr.slm"
+inc "std/int.slm"
+inc "std/mem.slm"
+inc "std/heap.slm"
+inc "std/dlist.slm"
+
+proc main 0 0
+  var list int.SIZE
+
+  "# dlist tests" cstr.println
+
+  list int.SIZE dlist.new put disc
+
+  "- dlist.len" cstr.println
+
+  list read dlist.len
+  0 != if
+    "- dlist.len broken, 0 size" cstr.println
+
+    -1 quit
+  end
+
+  list read dlist.free
+
+  ret
+end

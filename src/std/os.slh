@@ -1,0 +1,100 @@
+inc "std/cstr.slh"
+inc "std/mem.slh"
+
+class sysc
+  {TODO: finish}
+  enum
+  0   READ
+      WRITE
+      OPEN
+      CLOSE
+      STAT
+      FSTAT
+      LSTAT
+      POLL
+      LSEEK
+      MMAP
+
+  12  BRK
+
+  16  IOCTL
+
+  33  DUP2
+
+  41  SOCKET
+      CONNECT
+      ACCEPT
+
+  49  BIND
+      LISTEN
+    
+  57  FORK
+      VFORK
+      EXECVE
+      EXIT
+      WAIT4
+      KILL
+
+  78  GETDENTS
+      GETCWD
+
+  257 OPENAT
+  end
+end
+
+class fm
+  enum
+  0   READ
+      WRITE
+      READWR
+      ACC
+  end
+  
+  const CREATE 0040h
+  const EXCL   0080h
+  const NOCTTY 0100h
+  const TURNIC 0200h
+  const NOBLOK 0400h
+  const DSYNC  0800h
+  const ASYNC  1000h
+end
+
+class time
+  prop sec 8
+  prop nsec 8
+end
+
+class statresult
+  prop dev 8
+  prop ino 8
+  prop nlink 8
+  prop mode 4
+  prop uid 4
+  prop gid 4
+  prop _ 4
+  prop rdev 8
+  prop size 8
+  prop blksize 8
+  prop blocks 8
+
+  prop access time.SIZE
+  prop modify time.SIZE
+  prop create time.SIZE
+  prop _ 24
+end
+
+class os
+  head oper proc fork 0 1
+  head oper proc execcmd 1 0
+  head oper proc execcmdloud 1 0
+  head oper proc execcmdecho 1 0
+  head oper proc execcmdecholoud 1 0
+  head oper proc args 1 1
+  head oper proc env 1 1
+  head oper proc cwd 0 1
+  head oper proc existsf 1 1
+  head oper proc openf 4 1
+  head oper proc writef 3 0
+  head oper proc readf 3 1
+  head oper proc closef 1 0
+end

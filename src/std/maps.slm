@@ -1,0 +1,254 @@
+inc "std/maps.slh"
+
+class map
+  oper proc new 3 1
+    var result 8
+    var entry 8
+    var key 8
+    var hash 8
+
+    key swap put disc
+    entry swap put disc
+    hash swap put disc
+
+    result 24 hash read 8 * + heap.zalloc put disc
+
+    result read map.entrysize . entry read key read + put disc
+    result read map.keysize . key read put disc
+    result read map.count . hash read put disc
+
+    result read
+
+    ret
+  end
+
+  oper proc free 1 0
+    var self 8
+
+    self swap put disc
+    0
+    do
+      copy 8 *
+      self read map.dataarray . +
+      read
+      copy NULL != if
+        copy llist.free
+      end
+      disc
+
+      1 +
+     
+      copy
+      self read map.count @
+      <
+    end
+    disc
+    
+    self read heap.free
+
+    ret
+  end
+
+  oper proc valsize 1 1
+    var self 8
+
+    self swap put disc
+
+    self read map.entrysize @
+    self read map.keysize @ -
+
+    ret
+  end
+
+  oper proc append 3 1
+    var self 8
+    var key 8
+    var value 8
+    var entry 8
+
+    value swap put disc
+    key swap put disc
+    self swap put disc
+
+    entry self read map.entrysize @ heap.zalloc put disc
+
+    entry read
+    key read
+    self read map.keysize @
+    mem.cpy
+
+    entry read self read map.keysize @ +
+    value read
+    self read map.valsize
+    mem.cpy
+    
+    entry read
+    self read map.keysize @
+    hash.get
+    self read map.count @
+    /% swap disc 8 *
+    self read map.dataarray . +
+    
+    copy read NULL == if
+      copy
+      self read map.entrysize @
+      llist.new
+      put read
+
+      entry read llist.append
+      disc disc
+
+      entry read heap.free
+
+      self read
+
+      ret
+    end
+    read
+    copy llist.root @
+    do
+      entry read
+      covr llentry.data .
+      self read map.keysize @
+      mem.eq if
+        entry read
+        covr llentry.data . swap
+        self read map.entrysize @
+        mem.cpy
+
+        disc disc
+
+        entry read heap.free
+
+        self read
+
+        ret
+      end
+
+      llentry.next @
+      copy NULL !=
+    end
+    disc
+
+    entry read
+    llist.append disc 
+
+    entry read heap.free
+
+    self read
+
+    ret
+  end
+
+  oper proc foreach 2 0
+    var call 8
+    var self 8
+
+    call swap put disc
+    self swap put disc
+
+    0
+    do
+      copy 8 *
+      self read map.dataarray + @
+      copy NULL != if
+        copy call read llist.foreach
+      end
+      disc
+
+      1 +
+
+      copy
+      self read map.count @ <
+    end
+    disc
+
+    ret
+  end
+
+  oper proc getptr 2 2
+    var entry 8
+    var self 8
+
+    entry swap put disc
+    self swap put disc
+
+    entry read
+    self read map.keysize @
+    hash.get
+    self read map.count @
+    /% swap disc 8 *
+    self read map.dataarray + @
+    copy NULL == if
+      disc
+      NULL
+      self read swap
+      ret
+    end
+
+    llist.root @
+    do
+      entry read
+      covr llentry.data .
+      self read map.keysize @
+      mem.eq if
+        llentry.data .
+        self read map.keysize @ +
+        self read swap
+        ret
+      end
+
+      llentry.next @
+      copy NULL !=
+    end
+    disc
+
+    NULL
+    self read swap
+
+    ret
+  end
+
+  oper proc in 2 2
+    var entry 8
+    var self 8
+
+    entry swap put disc
+    self swap put disc
+
+    entry read
+    self read map.keysize @
+    hash.get
+    self read map.count @
+    /% swap disc 8 *
+    self read map.dataarray + @
+    copy NULL == if
+      disc
+      bool.false
+      self read swap
+      ret
+    end
+
+    llist.root @
+    do
+      entry read
+      covr llentry.data .
+      self read map.keysize @
+      mem.eq if
+        disc
+        bool.true
+        self read swap
+        ret
+      end
+
+      llentry.next @
+      copy NULL !=
+    end
+    disc
+
+    bool.false
+    self read swap
+
+    ret
+  end
+end

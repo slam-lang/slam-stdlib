@@ -1,0 +1,32 @@
+inc "std/int.slh"
+inc "std/mem.slh"
+
+class heapentry
+  prop addr 8
+  prop flags 1
+  prop size 8
+  prop data 0
+
+  head oper proc isentry 1 1
+  head oper proc setfree 1 0
+  head oper proc create 1 0
+end
+
+class heap
+  const BRK 12
+  const PAGE_SIZE 640000
+  const STEP_SIZE 64
+
+  var startaddr 8
+  var allocstart 8
+  var endaddr 8
+  var isinit 1
+
+  head oper proc newpage 0 0
+  head oper proc init 0 0
+
+  head oper proc alloc 1 1
+  head oper proc zalloc 1 1
+  head oper proc realloc 2 1
+  head oper proc free 1 0
+end

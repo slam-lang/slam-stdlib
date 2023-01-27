@@ -1,0 +1,16 @@
+inc "std/ptr.slh"
+inc "std/cstr.slh"
+
+class int
+  prop data 8
+
+  var tmpidx 8
+  var tmpresult 32
+
+  head oper proc gettmp 0 1
+  head oper proc inctmpidx 0 0
+  head oper proc cstr 1 1
+  head oper proc cstrhex 1 1
+  head oper proc print 1 0
+  head oper proc printhex 1 0
+end

@@ -1,0 +1,119 @@
+inc "std/dlist.slh"
+
+class dlist
+  oper proc new 1 1
+    var tmp 8
+
+    tmp
+    covr dlist.STEP * 24 + heap.zalloc
+    put disc
+
+    tmp read dlist.max . covr dlist.STEP * put disc
+    tmp read dlist.size . 0 put disc
+    tmp read dlist.elemsize . swap put disc
+
+    tmp read
+
+    ret
+  end
+
+  oper proc free 1 0
+    heap.free
+
+    ret
+  end
+
+  oper proc len 1 1
+    dlist.size . read
+
+    ret
+  end
+
+  oper proc getptr 2 1
+    var tmp 8
+
+    swap
+    tmp swap put disc
+
+    tmp read dlist.size . read
+    covr > ! if
+      disc NULL ret
+    end
+
+    tmp read dlist.elemsize . read *
+    tmp read dlist.data . +
+
+    ret
+  end
+
+  oper proc pop 1 1
+    var tmp 8
+
+    tmp swap put disc
+
+    tmp read dlist.size . read
+    0 == if
+      NULL ret
+    end
+
+    tmp read
+    tmp read
+    tmp read dlist.size . read 1 -
+    dlist.getptr
+    swap disc
+
+    tmp read dlist.size .
+    copy read 1 -
+    put disc
+
+    ret
+  end
+
+  oper proc append 2 1
+    var tmp 8
+
+    swap tmp swap put disc
+
+    tmp read dlist.size . read 1 +
+    tmp read dlist.elemsize . read *
+    tmp read dlist.max . read < ! if
+      tmp read dlist.max . read
+      tmp read dlist.elemsize . read
+      dlist.STEP * + 24 +
+
+      tmp read swap heap.realloc
+      tmp swap put disc
+
+      tmp read dlist.max .
+
+      tmp read dlist.max . read
+      tmp read dlist.elemsize . read
+      dlist.STEP * +
+
+      put disc
+    end
+    
+    tmp read dlist.size . read
+    tmp read dlist.elemsize . read *
+    tmp read dlist.data . +
+    swap
+
+    tmp read dlist.elemsize . read
+    mem.cpy
+    
+    tmp read dlist.size .
+    copy read 1 +
+    put disc
+
+    tmp read
+
+    ret
+  end
+
+  oper proc last 1 2
+    copy copy dlist.size . read 1 -
+    dlist.getptr
+
+    ret
+  end
+end

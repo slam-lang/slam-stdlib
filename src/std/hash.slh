@@ -1,0 +1,6 @@
+class hash
+  prop data 8
+
+  head oper proc new 2 1
+end
+

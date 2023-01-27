@@ -1,0 +1,6 @@
+class bool
+  prop val 1
+
+  const true 1
+  const false 0
+end

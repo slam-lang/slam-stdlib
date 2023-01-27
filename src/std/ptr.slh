@@ -1,0 +1,5 @@
+const NULL 0
+
+class ptr
+  head oper proc isnull 1 1
+end
