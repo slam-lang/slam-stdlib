@@ -78,6 +78,39 @@ class heap
     ret
   end
 
+  oper proc empty 0 1
+    heap.isinit readc 0 == if 1 ret end
+
+    heap.startaddr read
+    heap.STEP_SIZE -
+    do
+      heap.STEP_SIZE +
+      copy heapentry.isentry if
+        disc 0 ret
+      end
+      copy heap.endaddr read <
+    end
+    disc
+
+    1
+    ret
+  end
+
+  oper proc freeall 0 0
+    heap.startaddr read
+    heap.STEP_SIZE -
+    do
+      heap.STEP_SIZE +
+      copy heapentry.isentry if
+        copy heapentry.SIZE + heap.free
+      end
+      copy heap.endaddr read <
+    end
+    disc
+
+    ret
+  end
+
   oper proc alloc 1 1
     var reqsize 8
 

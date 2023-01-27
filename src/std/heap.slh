@@ -25,6 +25,7 @@ class heap
   head oper proc newpage 0 0
   head oper proc init 0 0
 
+  head oper proc empty 0 1
   head oper proc alloc 1 1
   head oper proc zalloc 1 1
   head oper proc realloc 2 1
