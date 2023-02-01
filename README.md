@@ -1,14 +1,16 @@
 this is the standard library for slam, also the first package
 
-# todo
+# Library Reqs
 
-- [ ] REWRITE
+## Fixed
 
-# Reqs
-
-- A class can only return NULL on failure
+- A class can only, and should, return NULL on failure.
 - Detect Segfaults before they happen, and return NULL.
 - Classes can use upto 32b of vars before you have to use the heap.
-- stdlib.slm imports the other libraries. 
-- No Printing out of print procs
-- NO [ ] BLOCKS
+- No Printing out of print procs.
+- Never quit!
+- Include everything needed in the .slh, include the .slh in the .slm.
+
+## Subject to change
+
+- Dont include extra libs, including a slm without calls!!!

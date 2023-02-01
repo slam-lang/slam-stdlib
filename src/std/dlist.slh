@@ -2,13 +2,16 @@ inc "std/heap.slh"
 inc "std/ptr.slh"
 inc "std/int.slh"
 
+{
+dynamic list, an expandable array.
+}
 class dlist
-  prop max 8
-  prop size 8
-  prop elemsize 8
-  prop data 0
+  prop max 8 { The space available for new elements }
+  prop size 8 { The elements in the list }
+  prop elemsize 8 { The size of an element in the list }
+  prop data 0 { The data of the list }
   
-  const STEP 16
+  const STEP 16 { How many elements to preallocate on expand }
 
   head oper proc new 1 1
   head oper proc free 1 0

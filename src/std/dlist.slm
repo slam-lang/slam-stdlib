@@ -1,6 +1,12 @@
 inc "std/dlist.slh"
 
 class dlist
+  {
+  Args: int[elemsize]
+  Rets: ptr[dlist]
+
+  Creates a new dlist.
+  }
   oper proc new 1 1
     var tmp 8
 
@@ -17,48 +23,72 @@ class dlist
     ret
   end
 
+  {
+  Args: ptr[dlist]
+  Rets: _
+
+  Frees a dlist from the heap.
+  }
   oper proc free 1 0
     heap.free
 
     ret
   end
 
+  {
+  Args: ptr[dlist]
+  Rets: int[length]
+
+  Gets the length of a dlist
+  }
   oper proc len 1 1
-    dlist.size . read
+    dlist.size @
 
     ret
   end
 
+  {
+  Args: ptr[dlist] int[idx]
+  Rets: ptr[element]
+
+  Gets the idx element of the list.
+  }
   oper proc getptr 2 1
     var tmp 8
 
     swap
     tmp swap put disc
 
-    tmp read dlist.size . read
+    tmp read dlist.size @
     covr > ! if
       disc NULL ret
     end
 
-    tmp read dlist.elemsize . read *
+    tmp read dlist.elemsize @ *
     tmp read dlist.data . +
 
     ret
   end
 
+  {
+  Args: ptr[dlist]
+  Rets: ptr[element]
+
+  Gets the last element of a dlist, and removes it.
+  }
   oper proc pop 1 1
     var tmp 8
 
     tmp swap put disc
 
-    tmp read dlist.size . read
+    tmp read dlist.size @
     0 == if
       NULL ret
     end
 
     tmp read
     tmp read
-    tmp read dlist.size . read 1 -
+    tmp read dlist.size @ 1 -
     dlist.getptr
     swap disc
 
@@ -69,16 +99,22 @@ class dlist
     ret
   end
 
+  {
+  Args: ptr[dlist] ptr[data]
+  Rets: ptr[dlist]
+
+  Appends a element to a dlist.
+  }
   oper proc append 2 1
     var tmp 8
 
     swap tmp swap put disc
 
-    tmp read dlist.size . read 1 +
-    tmp read dlist.elemsize . read *
-    tmp read dlist.max . read < ! if
-      tmp read dlist.max . read
-      tmp read dlist.elemsize . read
+    tmp read dlist.size @ 1 +
+    tmp read dlist.elemsize @ *
+    tmp read dlist.max @ < ! if
+      tmp read dlist.max @
+      tmp read dlist.elemsize @
       dlist.STEP * + 24 +
 
       tmp read swap heap.realloc
@@ -86,19 +122,19 @@ class dlist
 
       tmp read dlist.max .
 
-      tmp read dlist.max . read
-      tmp read dlist.elemsize . read
+      tmp read dlist.max @
+      tmp read dlist.elemsize @
       dlist.STEP * +
 
       put disc
     end
     
-    tmp read dlist.size . read
-    tmp read dlist.elemsize . read *
+    tmp read dlist.size @
+    tmp read dlist.elemsize @ *
     tmp read dlist.data . +
     swap
 
-    tmp read dlist.elemsize . read
+    tmp read dlist.elemsize @
     mem.cpy
     
     tmp read dlist.size .
@@ -110,9 +146,45 @@ class dlist
     ret
   end
 
+  {
+  Args: ptr[dlist]
+  Rets: ptr[element]
+
+  Gets the last element in a dlist.
+  }
   oper proc last 1 2
-    copy copy dlist.size . read 1 -
+    copy copy dlist.size @ 1 -
     dlist.getptr
+
+    ret
+  end
+
+  {
+  Args: ptr[dlist] ptr[call]
+  Rets: _
+  }
+  unsafe oper proc foreach 2 0
+    var call 8
+    var list 8
+
+    call swap put disc
+    list swap put disc
+
+    list read dlist.len
+    0 == if ret end
+
+    0
+    do
+      list read
+      covr
+      dlist.getptr
+      call read ()
+
+      1 +
+
+      copy list read dlist.len <
+    end
+    disc
 
     ret
   end

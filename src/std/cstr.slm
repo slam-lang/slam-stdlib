@@ -1,6 +1,12 @@
 inc "std/cstr.slh"
 
 class cstr
+  {
+  Args: ptr[cstr]
+  Rets: int[length]
+
+  Gets the length of a cstring.
+  }
   oper proc len 1 1
     copy readc 0 == if
       disc 0 ret
@@ -17,25 +23,49 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[cstr]
+  Rets: _
+
+  Prints a cstring to the console.
+  }
   oper proc print 1 0
     copy cstr.len swap 1 1 sys3 disc
 
     ret
   end
-  
-  oper proc cr 0 0
-    `\n` 1 1 sys3 disc
 
-    ret
-  end
+  {
+  Args: ptr[cstr]
+  Rets: _
 
+  Prints a cstring to the console followed by a new line.
+  }
   oper proc println 1 0
     cstr.print
     cstr.cr
 
     ret
   end
-  
+
+  {
+  Args: _
+  Rets: _
+
+  Prints a new line to the console
+  }
+  oper proc cr 0 0
+    `\n` 1 1 sys3 disc
+
+    ret
+  end
+
+  {
+  Args: ptr[cstr] ptr[cstr]
+  Rets: int[equal]
+
+  Compares 2 cstrings, returns bool.true if they are equal.
+  }
   oper proc eq 2 1
     1 -
     swap 1 -
@@ -69,6 +99,12 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[dest] ptr[src]
+  Rets: ptr[dest] ptr[src]
+
+  Copies src to desc and appends a null terminator.
+  }
   oper proc cpy 2 2
     covr
     covr
@@ -92,6 +128,12 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[cstr]
+  Rets: ptr[last]
+
+  Gets the last char in the cstring.
+  }
   oper proc last 1 1
     1 -
     do
@@ -105,6 +147,12 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[cstr]
+  Rets: ptr[cstr]
+
+  Fills a cstring with zeros.
+  }
   oper proc clear 1 1
     copy readc 0 == if ret end
     copy
@@ -122,13 +170,25 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[dest] ptr[src]
+  Rets: ptr[dest]
+
+  Appends src to dest.
+  }
   oper proc cat 2 1
     covr copy cstr.len +
     swap cstr.cpy disc disc
 
     ret
   end
-  
+
+  {
+  Args: ptr[cstr]
+  Rets: int[number?]
+
+  Returns bool.true if a cstr is a number.
+  }
   oper proc isnum 1 1
     var min 1
     var max 1
@@ -172,6 +232,12 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[cstr]
+  Rets: int[value]
+
+  Converts a cstring to a number.
+  }
   oper proc int 1 1
     var mul 8
     mul 10 putc disc
@@ -214,6 +280,12 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[src] int[delim] ptr[dest]
+  Rets: ptr[start] ptr[end]
+
+  Splits src at delim, destroys src.
+  }
   oper proc split 3 2
     var delim 8
     var store 8
@@ -244,6 +316,12 @@ class cstr
     ret
   end
 
+  {
+  Args: ptr[self]
+  Rets: ptr[self] ptr[next]
+
+  iterates through a cstr.
+  }
   push proc iter 1 2
     var tmp 8
 

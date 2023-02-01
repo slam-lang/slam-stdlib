@@ -138,7 +138,7 @@ class llist
     copy NULL == if disc ret end
 
     do
-      copy llentry.data . call read () disc 
+      copy llentry.data . call read ()
 
       llentry.next . read
       copy NULL !=

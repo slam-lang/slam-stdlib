@@ -96,6 +96,33 @@ class heap
     ret
   end
 
+  oper proc total 0 1
+    var val 8
+
+    heap.isinit readc 0 == if 0 ret end
+
+    val 0 put disc
+
+    heap.startaddr read
+    heap.STEP_SIZE -
+    do
+      heap.STEP_SIZE +
+      copy heapentry.isentry if
+        val
+        covr heapentry.size @
+        covr read +
+        put disc
+      end
+      copy heap.endaddr read <
+    end
+    disc
+
+    val read
+
+    ret
+  end
+
+
   oper proc freeall 0 0
     heap.startaddr read
     heap.STEP_SIZE -

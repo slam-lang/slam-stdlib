@@ -14,7 +14,7 @@ end
 
 class heap
   const BRK 12
-  const PAGE_SIZE 640000
+  const PAGE_SIZE 64000
   const STEP_SIZE 64
 
   var startaddr 8

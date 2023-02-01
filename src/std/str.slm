@@ -67,7 +67,6 @@ class str
     copy
     working read str.endaddr
     swap
-    copy heap.free
     copy str.len
     swap str.data .
     swap
@@ -174,5 +173,23 @@ class str
     swap disc
 
     ret
-  end  
+  end
+
+  oper proc dup 1 2
+    var result 8
+
+    result str.new put disc
+
+    result read covr str.cat
+    result swap put disc
+
+    result read
+    copy str.data .
+    swap str.size @ +
+    0 putc disc
+
+    result read
+
+    ret
+  end
 end
