@@ -45,14 +45,16 @@ class str
 
   oper proc cat 2 1
     var working 8
+    var append 8
 
-    swap working swap put disc
+    append swap put disc
+    working swap put disc
 
-    copy str.len
+    append read str.len
     working read str.len +
     working read str.max . read
     > if
-      copy str.len
+      append read str.len
       working read str.len +
       str.STEP +
       copy
@@ -64,18 +66,15 @@ class str
     end
     
 
-    copy
     working read str.endaddr
-    swap
-    copy str.len
-    swap str.data .
-    swap
+    append read str.data .
+    append read str.len
     mem.cpy
 
-    str.len
-    working read str.len +
     working read str.size .
-    swap put disc
+    append read str.len
+    working read str.len +
+    put disc
 
     working read
 
